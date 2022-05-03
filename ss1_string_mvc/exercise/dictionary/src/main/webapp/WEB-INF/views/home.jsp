@@ -17,14 +17,27 @@
 <h1>Dictionary</h1>
 </center>
 <form action="/translate" method="post">
-    <div class="form-group">
-        <input type="text" class="form-control" name="search" placeholder="Enter your word">
-    </div>
-    <center>
-    <button type="submit" class="btn btn-primary">Search</button>
-        <br>
-        <h3>Result: ${result}</h3>
-    </center>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                <input type="text" class="form-control" name="search" placeholder="Enter your word">
+            </th>
+            <th>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </th>
+            <th>
+                <h3>Result: ${result}</h3>
+            </th>
+        </tr>
+    </table>
+<%--    <div class="form-group">--%>
+<%--        <input type="text" class="form-control" name="search" placeholder="Enter your word">--%>
+<%--    </div>--%>
+<%--    <center>--%>
+<%--    <button type="submit" class="btn btn-primary">Search</button>--%>
+<%--        <br>--%>
+<%--        <h3>Result: ${result}</h3>--%>
+<%--    </center>--%>
 
 </form>
 
