@@ -7,53 +7,71 @@
 <body>
     <h2>Khai báo y tế</h2>
     <form:form method="post" modelAttribute="medical">
-        <div>
-            Họ và tên:
-            <form:input type="text" path="name"/>
-        </div>
-        <div>
-            Năm sinh:
-            <form:input type="number" path="birth"/>
-        </div>
-        <div>
-            Giới tính:
-            <form:select  path="gender">
+        <table border="1px">
+        <tr>
+            <th>Họ và tên:</th>
+            <td><form:input type="text" path="name"/></td>
+
+        </tr>
+        <tr>
+            <th>Năm sinh:</th>
+            <td><form:input type="number" path="birth"/></td>
+
+        </tr>
+        <tr>
+            <th>Giới tính:</th>
+            <td>
+                <form:select  path="gender">
                 <form:option value="Nam">Nam</form:option>
                 <form:option value="Nữ">Nữ</form:option>
                 <form:option value="Khác">Khác</form:option>
             </form:select>
-        </div>
-        <div>
-            Quốc tịch:
-            <form:input type="text" path="nation"/>
-        </div>
-        <div>
-            Chứng minh nhân dân:
-            <form:input type="text" path="id"/>
-        </div>
-        <div>
-            Thông tin đi lại:
-            <form:radiobutton path="transport" value="Tàu bay"/> Tàu bay
-            <form:radiobutton path="transport" value="Tàu thuyền"/> Tàu thuyền
-            <form:radiobutton path="transport" value="Ô tô"/> Ô tô
-            <form:radiobutton path="transport" value="Khác"/> Khác
-        </div>
-        <div>
-            Số hiệu phương tiện:
-            <form:input type="text" path="licensePlate"/>
-        </div>
-        <div>
-            Ngày khởi hành:
-            <form:input type="date" path="startDay"/>
-        </div>
-        <div>
-            Ngày kết thúc:
-            <form:input type="date" path="endDay"/>
-        </div>
-        <div>
-            Trong 14 ngày, anh chị đi những đâu
-            <form:textarea rows="5" cols="100" path="route"/>
-        </div>
+            </td>
+
+        </tr>
+        <tr>
+            <th>Quốc tịch:</th>
+            <td><form:input type="text" path="nation"/></td>
+
+        </tr>
+        <tr>
+            <th>Chứng minh nhân dân:</th>
+            <td><form:input type="text" path="id"/></td>
+
+        </tr>
+        <tr>
+            <th>Thông tin đi lại:</th>
+            <td>
+                <form:radiobutton path="transport" value="Tàu bay"/> Tàu bay
+                <form:radiobutton path="transport" value="Tàu thuyền"/> Tàu thuyền
+                <form:radiobutton path="transport" value="Ô tô"/> Ô tô
+                <form:radiobutton path="transport" value="Khác"/> Khác
+            </td>
+
+        </tr>
+        <tr>
+            <th>Số hiệu phương tiện:</th>
+            <td><form:input type="text" path="licensePlate"/></td>
+
+        </tr>
+        <tr>
+            <th>Ngày khởi hành:</th>
+            <td><form:input type="date" path="startDay"/></td>
+
+        </tr>
+        <tr>
+            <th>Ngày kết thúc:</th>
+            <td><form:input type="date" path="endDay"/></td>
+
+        </tr>
+        <tr>
+            <th>Trong 14 ngày, anh chị đi những đâu</th>
+            <td><form:textarea rows="5" cols="100" path="route"/></td>
+        </tr>
+<%--        <tr>--%>
+<%--            <input type="submit" value="Gửi khai báo">--%>
+<%--        </tr>--%>
+        </table>
         <div>
             <input type="submit" value="Gửi khai báo">
         </div>
