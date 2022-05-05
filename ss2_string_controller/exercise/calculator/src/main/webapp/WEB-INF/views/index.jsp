@@ -21,6 +21,6 @@
     <button type="submit" value="/" name="result">Division (/)</button>
   </form>
 
-  <h2>Result: ${final_result}</h2>
+  <h2>Result: ${finalResult}</h2>
   </body>
 </html>

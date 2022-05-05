@@ -24,7 +24,7 @@ public class CalculatorController {
                              @RequestParam("num2") Double num2,
                              @RequestParam("result") String result,
                              Model model){
-        model.addAttribute("final_result", this.iCaculatorService.calculate(num1,num2,result));
+        model.addAttribute("finalResult", this.iCaculatorService.calculate(num1,num2,result));
         return "index";
     }
 }

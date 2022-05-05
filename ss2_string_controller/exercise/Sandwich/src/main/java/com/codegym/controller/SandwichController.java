@@ -13,7 +13,7 @@ public class SandwichController {
         return"list";
     }
     @PostMapping("/choose")
-    public String show( String mam,
+    public String show(
                        @RequestParam(value = "muoi", defaultValue = "") String[] muoi,
                        Model model) {
         model.addAttribute("muoi", muoi);
