@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>List Product</title>
+    <link rel="stylesheet" href="bootstrap413/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css"/>
 </head>
 <body>
-$END$
+<center>
+    <h2>List Product</h2>
+    <form action="/search" method="post">
+        <input type="text" placeholder="Enter Product Name" name="name">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <h2>
+        <button class="btn btn-success"><a href="/create">Create New Product</a></button>
+    </h2>
+</center>
+<div align="center" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <th>#</th>
+                <th>SKU</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Delete</th>
+                <th>Detail</th>
+                <th>Update</th>
+                </thead>
+                <tbody>
+                <tr th:each="product, no: ${productList}">
+                    <td th:text="${no.count}"></td>
+                    <td th:text="${product.productId}"></td>
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.quantity}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td>
+                        <a th:href="@{/delete(productId=${product.productId})}">
+                            <button class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/detail(productId=${product.productId})}">
+                            <button class="btn btn-primary">Detail</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/update(productId=${product.productId})}">
+                            <button class="btn btn-primary">Update</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>

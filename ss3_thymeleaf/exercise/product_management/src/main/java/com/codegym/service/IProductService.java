@@ -1,2 +1,14 @@
-package com.codegym.service;public interface IProductService {
+package com.codegym.service;
+
+import com.codegym.model.Product;
+
+import java.util.List;
+
+public interface IProductService {
+    List<Product> showAll();
+    void createProduct(Product product);
+    void deleteProduct(int productId);
+    Product detail(int productId);
+    void updateProduct(Product product);
+    List<Product> searchByName(String name);
 }
