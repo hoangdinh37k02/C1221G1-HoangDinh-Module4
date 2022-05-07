@@ -5,6 +5,7 @@
     <title>Product detail</title>
 </head>
 <body>
+<nav th:replace="~{layout :: nav}"></nav>
     <h2>Product detail</h2>
 <table border="1px" cellspacing="0px" cellpadding="0px">
     <tr>
@@ -24,5 +25,6 @@
         <td th:text="${product.price}"></td>
     </tr>
 </table>
+<footer th:replace="~{layout :: footer}"></footer>
 </body>
 </html>
