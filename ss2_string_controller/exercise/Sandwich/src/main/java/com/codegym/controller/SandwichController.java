@@ -14,9 +14,9 @@ public class SandwichController {
     }
     @PostMapping("/choose")
     public String show(
-                       @RequestParam(value = "muoi", defaultValue = "") String[] muoi,
+                       @RequestParam(value = "condiment", defaultValue = "") String[] condiment,
                        Model model) {
-        model.addAttribute("muoi", muoi);
+        model.addAttribute("condiment", condiment);
         return "show";
     }
 }

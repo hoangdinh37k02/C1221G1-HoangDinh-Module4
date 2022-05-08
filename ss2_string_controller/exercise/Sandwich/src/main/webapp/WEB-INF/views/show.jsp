@@ -12,23 +12,20 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Gia vị đã chọn</h1>
+<h1>Condiment</h1>
 <table border="1px">
     <tr>
-        <td>STT</td>
-        <td>Gia vị</td>
+        <td>#</td>
+        <td>Condiment</td>
     </tr>
-    <c:forEach varStatus="No" var="muoi" items="${muoi}">
+    <c:forEach varStatus="No" var="condiment" items="${condiment}">
         <tr>
             <td>${No.count}</td>
-            <td>${muoi}</td>
+            <td>${condiment}</td>
         </tr>
 
     </c:forEach>
 
 </table>
-<%--    <c:forEach--%>
-<%--    <h2>${mam}</h2>--%>
-<%--    <h2>${muoi}</h2>--%>
 </body>
 </html>
