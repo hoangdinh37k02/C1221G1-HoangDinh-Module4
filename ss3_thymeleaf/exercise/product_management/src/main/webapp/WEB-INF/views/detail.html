@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Product detail</title>
+    <link rel="stylesheet" href="bootstrap413/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css"/>
 </head>
 <body>
 <nav th:replace="~{layout :: nav}"></nav>
-    <h2>Product detail</h2>
-<table border="1px" cellspacing="0px" cellpadding="0px">
+<center>
+    <h2>Detail Product</h2>
+
+    <a href="/list"><button class="btn btn-primary"> Back to List Product</button></a>
+</center>
+<table class="table table-striped table-bordered">
     <tr>
         <th>SKU: </th>
         <td th:text="${product.productId}"></td>

@@ -14,7 +14,6 @@ public class ProductServiceImpl implements IProductService {
     Product product = new Product();
     static Map<Integer, Product> productMap = new HashMap<>();
     static{
-//        productMap = new HashMap<>();
         productMap.put(1,new Product(1,"Cosy",10,15000));
         productMap.put(2,new Product(2,"Oreo",10,20000));
         productMap.put(3,new Product(3,"Caro",40,8000));
@@ -28,7 +27,6 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public void createProduct(Product product) {
         product.setProductId(this.showAll().size()+1);
-//        (int) (Math.random()*1000)
         productMap.put(product.getProductId(), product);
     }
 

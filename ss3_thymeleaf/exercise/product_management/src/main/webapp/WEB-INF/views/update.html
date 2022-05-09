@@ -10,10 +10,11 @@
 <nav th:replace="~{layout :: nav}"></nav>
 <center>
     <h2>Update Product</h2>
+    <a href="/list"><button class="btn btn-primary"> Back to List Product</button></a>
 </center>
     <div align="center" class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-md-3">
                 <form action="" th:object="${product}" method="post">
 
                     <div class="form-group">

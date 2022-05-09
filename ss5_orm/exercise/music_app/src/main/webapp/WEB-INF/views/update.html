@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Music</title>
+    <th:blook th:replace="~{layout :: bootstrap}"></th:blook>
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+    <h2>Update Music</h2>
+<!--    <a href="/list"><button class="btn btn-primary">Back to List Song</button></a>-->
+    <form action="/update" th:object="${music}" method="post">
+        <table class="table table-striped table-bordered">
+        <input type="hidden" th:field="*{id}">
+            <tr>
+                <th>Song Name:</th>
+                <td>
+                    <input type="text" th:field="*{songName}">
+                </td>
+
+            </tr>
+            <tr>
+                <th>Singer:</th>
+                <td><input type="text" th:field="*{singer}"></td>
+            </tr>
+            <tr>
+                <th>
+                    Type:
+                </th>
+                <td><input type="text" th:field="*{type}"></td>
+            </tr>
+            <tr>
+                <th>
+                    Link:
+                </th>
+                <td><input type="text" th:field="*{link}"></td>
+            </tr>
+
+        </table>
+        <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+
+    <footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>
