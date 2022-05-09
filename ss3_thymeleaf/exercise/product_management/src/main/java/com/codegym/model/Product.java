@@ -1,6 +1,12 @@
 package com.codegym.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="product")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
     private String productName;
     private int quantity;

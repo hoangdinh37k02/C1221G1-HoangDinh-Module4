@@ -35,7 +35,8 @@ public class ProductController {
 
     @GetMapping(value = "/delete")
     public String deleteProduct(@RequestParam("productId") int productId){
-        this.iProductService.deleteProduct(productId);
+        Product product = this.iProductService.detail(productId);
+        this.iProductService.deleteProduct(product);
         return "redirect:/list";
     }
 
