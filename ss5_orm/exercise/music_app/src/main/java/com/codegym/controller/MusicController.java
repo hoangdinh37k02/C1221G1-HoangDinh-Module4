@@ -35,7 +35,7 @@ public class MusicController {
         return "redirect:/list";
     }
 
-//    list
+//    delete
     @GetMapping (value = "/delete")
     public String deleteSong(@RequestParam("id") int id){
         Music music = this.iMusicService.findById(id);

@@ -50,12 +50,16 @@ public class ProductRepositoryImpl implements IProductRepository {
 
     @Override
     public List<Product> searchByName(String name) {
-        List<Product> productList = new ArrayList<>();
-        for (Product product: this.showAll()) {
-            if ((product.getProductName().toLowerCase()).contains(name.toLowerCase())){
-                productList.add(product);
-            }
-        }
-        return productList;
+        TypedQuery<Product> typedQuery = BaseRepository.entityManager.createQuery(
+                "select s from Product s where s.productName like : name", Product.class);
+        typedQuery.setParameter("name","%"+name+"%");
+        return typedQuery.getResultList();
+//        List<Product> productList = new ArrayList<>();
+//        for (Product product: this.showAll()) {
+//            if ((product.getProductName().toLowerCase()).contains(name.toLowerCase())){
+//                productList.add(product);
+//            }
+//        }
+//        return productList;
     }
 }
