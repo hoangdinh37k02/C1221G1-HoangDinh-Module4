@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product detail</title>
+    <link rel="stylesheet" href="bootstrap413/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css"/>
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<center>
+    <h2>Detail Product</h2>
+
+    <a href="/list"><button class="btn btn-primary"> Back to List Product</button></a>
+</center>
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>SKU: </th>
+        <td th:text="${product.productId}"></td>
+    </tr>
+    <tr>
+        <th>Product Name: </th>
+        <td th:text="${product.productName}"></td>
+    </tr>
+    <tr>
+        <th>Product Type: </th>
+        <td th:text="${product.productType.name}"></td>
+    </tr>
+    <tr>
+        <th>Quantity: </th>
+        <td th:text="${product.quantity}"></td>
+    </tr>
+    <tr>
+        <th>Quantity: </th>
+        <td th:text="${product.price}"></td>
+    </tr>
+</table>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

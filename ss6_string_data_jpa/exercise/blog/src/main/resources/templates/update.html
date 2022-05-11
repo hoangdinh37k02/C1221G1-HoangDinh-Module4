@@ -8,7 +8,7 @@
 <body>
 <nav th:replace="~{layout :: nav}"></nav>
     <h2>Update Blog</h2>
-    <form action="/create" th:object="${blog}" method="post">
+    <form action="/update" th:object="${blog}" method="post">
         <table class="table table-striped table-bordered">
             <input type="hidden" th:field="*{blogId}">
             <tr>

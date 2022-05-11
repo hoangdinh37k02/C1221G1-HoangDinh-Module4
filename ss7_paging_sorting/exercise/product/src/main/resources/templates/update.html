@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Product</title>
+    <link rel="stylesheet" href="bootstrap413/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css"/>
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<center>
+    <h2>Update Product</h2>
+    <a href="/list"><button class="btn btn-primary"> Back to List Product</button></a>
+</center>
+    <div align="center" class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <form action="" th:object="${product}" method="post">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Product Name</label>
+                        <input type="text" th:field="*{productName}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Product Name">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Type</label>
+                        <select th:field="*{productType}">
+                            <option th:each="type:${productTypeList}"
+                                    th:value="${type.id}"
+                                    th:text="${type.name}"
+                            ></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Quantity</label>
+                        <input type="number" class="form-control" th:field="*{quantity}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Price</label>
+                        <input type="number" class="form-control" th:field="*{price}" id="exampleInputPassword1">
+                    </div>
+                    <center>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </center>
+                </form>
+            </div>
+        </div>
+
+    </div>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>

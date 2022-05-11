@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Product</title>
+    <link rel="stylesheet" href="bootstrap413/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css" />
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<center>
+    <h2>List Product</h2>
+    <h2>
+        <a href="/create"><button class="btn btn-primary">Create New Product</button></a>
+    </h2>
+</center>
+<div align="center" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <th>#</th>
+                <th>SKU</th>
+                <th>Product Name</th>
+                <th>Product Type</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Delete</th>
+                <th>Detail</th>
+                <th>Update</th>
+                </thead>
+                <tbody>
+                <tr th:each="product, no: ${productList}">
+                    <td th:text="${no.count}"></td>
+                    <td th:text="${product.productId}"></td>
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.productType.name}">
+                    </td>
+                    <td th:text="${product.quantity}"></td>
+                    <td th:text="${product.price}"></td>
+<!--                    <td>-->
+<!--                        <a th:href="@{/delete(productId=${product.productId})}">-->
+<!--                            <button class="btn btn-danger">Delete</button>-->
+<!--                        </a>-->
+<!--                    </td>-->
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                                th:attr="onclick=|deleteModal('${product.productId}', '${product.productName}')|">
+                            Delete
+                        </button>
+                    </td>
+                    <td>
+                        <a th:href="@{/detail(productId=${product.productId})}">
+                            <button class="btn btn-primary">Detail</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/update(productId=${product.productId})}">
+                            <button class="btn btn-primary">Update</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<div>
+    <a th:if="${productList.hasPrevious()}"
+            th:href="@{/list(page=${productList.number-1},name=${nameVal})}">Previous</a>
+    <span th:text="${productList.number+1}"></span>/ <span th:text="${productList.totalPages}"></span>
+    <a th:if="${productList.hasNext()}"
+            th:href="@{/list(page=${productList.number+1},name=${nameVal})}">Next</a>
+</div>
+
+<form th:action="@{/delete}">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="productIdMove" name="productId">
+                    Do you want to delete this product: <br>
+                    Product Name:  <p id="productName"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="jquery/jquery-3.5.1.min.js"></script>
+<script src="datatables/js/jquery.dataTables.min.js"></script>
+<script src="datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+    function deleteModal(productId,productName){
+        document.getElementById("productIdMove").value=productId;
+        document.getElementById("productName").innerText=productName;
+    }
+</script>
+
+<footer th:replace="~{layout :: footer}"></footer>
+
+
+
+</body>
+</html>
