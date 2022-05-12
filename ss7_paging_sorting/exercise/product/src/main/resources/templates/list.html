@@ -13,6 +13,17 @@
     <h2>
         <a href="/create"><button class="btn btn-primary">Create New Product</button></a>
     </h2>
+    <form action="/list" method="get">
+        <input type="text" name="name" placeholder="Search by Name">
+<!--        <select name="type">-->
+<!--            <Option value="">Type Product</Option>-->
+<!--            <option th:each="type:${productTypeList}"-->
+<!--                    th:value="${type.id}"-->
+<!--                    th:text="${type.name}"-->
+<!--            ></option>-->
+<!--        </select>-->
+        <button type="submit">Search</button>
+    </form>
 </center>
 <div align="center" class="container">
     <div class="row">
@@ -68,10 +79,10 @@
 </div>
 <div>
     <a th:if="${productList.hasPrevious()}"
-            th:href="@{/list(page=${productList.number-1},name=${nameVal})}">Previous</a>
+            th:href="@{/list(page=${productList.number-1},name=${nameVal},type=${type})}">Previous</a>
     <span th:text="${productList.number+1}"></span>/ <span th:text="${productList.totalPages}"></span>
     <a th:if="${productList.hasNext()}"
-            th:href="@{/list(page=${productList.number+1},name=${nameVal})}">Next</a>
+            th:href="@{/list(page=${productList.number+1},name=${nameVal},type=${type})}">Next</a>
 </div>
 
 <form th:action="@{/delete}">

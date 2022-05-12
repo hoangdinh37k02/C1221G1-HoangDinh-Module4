@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${message}"></p>
+<a href="/create">Go to Create Form</a>
+<table>
+    <thead>
+    <th>ID</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Age</th>
+    <th>Email</th>
+    <th>Phone</th>
+    </thead>
+    <tbody>
+    <tr th:each="form:${formList}">
+        <td th:text="${form.formId}"></td>
+        <td th:text="${form.firstName}"></td>
+        <td th:text="${form.lastName}"></td>
+        <td th:text="${form.age}"></td>
+        <td th:text="${form.email}"></td>
+        <td th:text="${form.phone}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

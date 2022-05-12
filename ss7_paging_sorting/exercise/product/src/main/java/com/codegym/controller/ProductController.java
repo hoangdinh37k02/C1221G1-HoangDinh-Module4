@@ -1,9 +1,11 @@
 package com.codegym.controller;
 
 import com.codegym.model.Product;
+import com.codegym.model.ProductType;
 import com.codegym.service.IProductService;
 import com.codegym.service.IProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,7 @@ public class ProductController {
                           @PageableDefault(value = 3)Pageable pageable,
                           @RequestParam Optional<String> name){
         String nameVal = name.orElse("");
-        model.addAttribute("productList", this.iProductService.findAll(nameVal, pageable));
+        model.addAttribute("productList", this.iProductService.findAll(nameVal,null, pageable));
         model.addAttribute("productTypeList", this.iProductTypeService.findAll());
         model.addAttribute("nameVal", nameVal);
         return "list";

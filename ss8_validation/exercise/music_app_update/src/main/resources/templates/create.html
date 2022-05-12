@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Song</title>
+    <th:blook th:replace="~{layout :: bootstrap}"></th:blook>
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<h1>Create New Song</h1>
+<!--<a href="/list"><button class="btn btn-primary">Back to List Song</button></a>-->
+<form action="/create" th:object="${musicDto}" method="post">
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                Name of song:
+            </th>
+            <td>
+                <input type="text" th:field="*{songName}">
+                <p style="color: red" th:if="${#fields.hasErrors('songName')}" th:errors="*{songName}"></p>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Singer:
+            </th>
+            <td>
+                <input type="text" th:field="*{singer}">
+                <p style="color: red" th:if="${#fields.hasErrors('singer')}" th:errors="*{singer}"></p>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Type:
+            </th>
+            <td>
+                <input type="text" th:field="*{type}">
+                <p style="color: red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Link:
+            </th>
+            <td>
+                <input type="text" th:field="*{link}">
+            </td>
+        </tr>
+    </table>
+    <button class="btn btn-primary" type="submit">Submit</button>
+
+</form>
+<footer th:replace="~{layout :: footer}"></footer>
+</body>
+</html>
