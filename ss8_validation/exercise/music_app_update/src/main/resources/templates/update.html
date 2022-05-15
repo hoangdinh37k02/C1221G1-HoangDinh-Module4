@@ -9,25 +9,29 @@
 <nav th:replace="~{layout :: nav}"></nav>
     <h2>Update Music</h2>
 <!--    <a href="/list"><button class="btn btn-primary">Back to List Song</button></a>-->
-    <form action="/update" th:object="${music}" method="post">
+    <form action="/update" th:object="${musicDto}" method="post">
         <table class="table table-striped table-bordered">
         <input type="hidden" th:field="*{id}">
             <tr>
                 <th>Song Name:</th>
                 <td>
                     <input type="text" th:field="*{songName}">
+                    <p style="color: red" th:if="${#fields.hasErrors('songName')}" th:errors="*{songName}"></p>
                 </td>
 
             </tr>
             <tr>
                 <th>Singer:</th>
-                <td><input type="text" th:field="*{singer}"></td>
+                <td><input type="text" th:field="*{singer}">
+                <p style="color: red" th:if="${#fields.hasErrors('singer')}" th:errors="*{singer}"></p>
+                </td>
             </tr>
             <tr>
                 <th>
                     Type:
                 </th>
                 <td><input type="text" th:field="*{type}"></td>
+                <p style="color: red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
             </tr>
             <tr>
                 <th>

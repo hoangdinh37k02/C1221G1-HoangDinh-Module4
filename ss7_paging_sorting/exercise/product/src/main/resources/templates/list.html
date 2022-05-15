@@ -14,15 +14,17 @@
         <a href="/create"><button class="btn btn-primary">Create New Product</button></a>
     </h2>
     <form action="/list" method="get">
-        <input type="text" name="name" placeholder="Search by Name">
-<!--        <select name="type">-->
-<!--            <Option value="">Type Product</Option>-->
-<!--            <option th:each="type:${productTypeList}"-->
-<!--                    th:value="${type.id}"-->
-<!--                    th:text="${type.name}"-->
-<!--            ></option>-->
-<!--        </select>-->
-        <button type="submit">Search</button>
+        <div class="form-group">
+        <input type="text" name="name" placeholder="Search by Name" class="form">
+        <select name="type">
+            <Option value="">Type Product</Option>
+            <option th:each="type:${productTypeList}"
+                    th:value="${type.id}"
+                    th:text="${type.name}"
+            ></option>
+        </select>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
     </form>
 </center>
 <div align="center" class="container">
@@ -32,6 +34,7 @@
                 <thead>
                 <th>#</th>
                 <th>SKU</th>
+                <th>Product Code</th>
                 <th>Product Name</th>
                 <th>Product Type</th>
                 <th>Quantity</th>
@@ -41,9 +44,10 @@
                 <th>Update</th>
                 </thead>
                 <tbody>
-                <tr th:each="product, no: ${productList}">
+                <tr th:each="product,no : ${productList}">
                     <td th:text="${no.count}"></td>
                     <td th:text="${product.productId}"></td>
+                    <td th:text="${product.productCode}"></td>
                     <td th:text="${product.productName}"></td>
                     <td th:text="${product.productType.name}">
                     </td>
@@ -79,10 +83,10 @@
 </div>
 <div>
     <a th:if="${productList.hasPrevious()}"
-            th:href="@{/list(page=${productList.number-1},name=${nameVal},type=${type})}">Previous</a>
+            th:href="@{/list(page=${productList.number-1},name=${nameVal},type=${typeVal})}">Previous</a>
     <span th:text="${productList.number+1}"></span>/ <span th:text="${productList.totalPages}"></span>
     <a th:if="${productList.hasNext()}"
-            th:href="@{/list(page=${productList.number+1},name=${nameVal},type=${type})}">Next</a>
+            th:href="@{/list(page=${productList.number+1},name=${nameVal},type=${typeVal})}">Next</a>
 </div>
 
 <form th:action="@{/delete}">

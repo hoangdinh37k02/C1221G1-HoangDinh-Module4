@@ -8,6 +8,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
+    private String productCode;
     private String productName;
     private int quantity;
     private double price;
@@ -22,6 +23,14 @@ public class Product {
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 
     public ProductType getProductType() {

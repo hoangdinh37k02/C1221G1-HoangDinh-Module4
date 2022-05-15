@@ -24,7 +24,7 @@ public class BlogController {
     private IBlogTypeService iBlogTypeService;
 //show list
     @GetMapping(value = {"/list","/"})
-    public String showList(Model model, @PageableDefault(value = 2) Pageable pageable,
+    public String showList(Model model, @PageableDefault(value = 3) Pageable pageable,
                            @RequestParam Optional<String> name){
         String nameVal = name.orElse("");
         model.addAttribute("blogList",this.iBlogService.getBlogByName(nameVal, pageable));

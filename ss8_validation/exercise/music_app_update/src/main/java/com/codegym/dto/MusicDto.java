@@ -3,18 +3,22 @@ package com.codegym.dto;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class MusicDto implements Validator {
     private int id;
     @NotEmpty
+    @NotBlank
     @Size(min = 1,max = 800, message = "number of character is between 1 to 800 character")
     private String songName;
     @NotEmpty
+    @NotBlank
     @Size(min = 1,max = 300, message = "number of character is between 1 to 300 character")
     private String singer;
     @NotEmpty
+    @NotBlank
     @Size(min = 1,max = 1000, message = "number of character is between 1 to 1000 character")
     private String type;
     private String link;

@@ -16,11 +16,18 @@
 <div align="center" class="container">
     <div class="row">
         <div class="col-lg-12">
-            <form action="" th:object="${product}" method="post">
+            <form action="" th:object="${productDto}" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Product Code</label>
+                    <input type="text" th:field="*{productCode}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Product Code">
+                    <p style="color: red" th:if="${#fields.hasErrors('productCode')}" th:errors="*{productCode}"></p>
+                </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
                     <input type="text" th:field="*{productName}" class="form-control" id="exampleInputEmail1"
                            aria-describedby="emailHelp" placeholder="Enter Product Name">
+                    <p style="color: red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Type</label>
@@ -34,10 +41,12 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Quantity</label>
                     <input type="number" class="form-control" th:field="*{quantity}">
+                    <p style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Price</label>
                     <input type="number" class="form-control" th:field="*{price}" id="exampleInputPassword1">
+                    <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
                 </div>
                 <center>
                     <button type="submit" class="btn btn-primary">Submit</button>

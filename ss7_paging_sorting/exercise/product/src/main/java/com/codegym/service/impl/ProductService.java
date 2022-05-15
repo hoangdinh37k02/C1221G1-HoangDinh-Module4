@@ -1,7 +1,6 @@
 package com.codegym.service.impl;
 
 import com.codegym.model.Product;
-import com.codegym.model.ProductType;
 import com.codegym.repository.IProductRepository;
 import com.codegym.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +10,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class ProductService implements IProductService {
     @Autowired
             private IProductRepository iProductRepository;
     @Override
-    public Page<Product> findAll(String name,Integer id, Pageable pageable) {
+    public Page<Product> findAllByProductNameContaining(String name, Pageable pageable) {
 
-        return this.iProductRepository.findAllByProductNameContainingAndProductTypeAndProductId(name,id, pageable);
+        return this.iProductRepository.findAllByProductNameContaining(name, pageable);
+    }
+
+    @Override
+    public Page<Product> findAllByProductNameContainingAndProduct_Type_Id(String name, String type, Pageable pageable) {
+        return this.iProductRepository.findAllByProductNameContainingAndProductType_Id(name, Integer.parseInt(type), pageable);
     }
 
     @Override
@@ -43,5 +48,7 @@ public class ProductService implements IProductService {
 
         this.iProductRepository.save(product);
     }
+
+
 
 }
