@@ -13,6 +13,7 @@ import java.util.Locale;
 @Component
 @Aspect
 public class LogAspect {
+    int count=0;
 @Pointcut("execution(* com.codegym.controller.BookController.book*(..))")
     public void allMethodPointCut(){}
 
@@ -20,8 +21,9 @@ public class LogAspect {
     public void methodPointCut(){}
     @Before("methodPointCut()")
     public void beforeCallHome(JoinPoint joinPoint){
+    count +=1;
         System.err.println("Start method name: "+joinPoint.getSignature().getName()+
-                ", Time: "+ LocalDateTime.now());
+                ", Time: "+ LocalDateTime.now()+ ", Số lần vào trang chủ: "+count);
     }
 
 
