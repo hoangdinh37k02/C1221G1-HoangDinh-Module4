@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Borrowing Information</title>
+</head>
+<body>
+<a href="/list">Back to Book List</a>
+<p th:text="${message}"></p>
+<table border="1px">
+    <tr>
+        <th>Your borrowing code</th>
+        <td th:text="${borrow.id}"></td>
+    </tr>
+    <tr>
+        <th>Your book</th>
+        <td th:text="${borrow.bookId.bookName}"></td>
+    </tr>
+</table>
+<h2 style="color: red">You must remember borrowing code to return book exactly</h2>
+</body>
+</html>

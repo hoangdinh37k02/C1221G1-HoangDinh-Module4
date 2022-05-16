@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Returning Book</title>
+</head>
+<body>
+<a href="/list">Back to Book List</a>
+<table border="1px">
+    <tr>
+        <th>Your borrowing code</th>
+        <td th:text="${borrowingBook.id}"></td>
+    </tr>
+    <tr>
+        <th>Your book</th>
+        <td th:text="${borrowingBook.bookId.bookName}"></td>
+    </tr>
+</table>
+Do you want to return this book?
+<form action="/confirm" method="post">
+    <input name="borrowCode" type="hidden" th:value="${borrowingBook.id}"></input>
+    <input name="bookId" type="hidden" th:value="${borrowingBook.bookId.bookId}"></input>
+    <button type="submit">Return</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Book</title>
+</head>
+<body>
+<h2>Book list</h2>
+<a href="/create">Create New Book</a>
+<p th:text="${message}"></p>
+<table border="1">
+    <thead>
+    <th>#</th>
+    <th>Book ID</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Action</th>
+    <th>Borrow</th>
+    </thead>
+    <tbody>
+    <tr th:each="book, no:${bookList}">
+        <td th:text="${no.count}"></td>
+        <td th:text="${book.bookId}"></td>
+        <td th:text="${book.bookName}"></td>
+        <td th:text="${book.quantity}"></td>
+        <td>
+            <a th:href="@{/delete(bookId=${book.bookId})}">
+                <button>Delete</button>
+            </a>
+            <a th:href="@{/update(bookId=${book.bookId})}">
+                <button>Update</button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/detail(bookId=${book.bookId})}">
+                <button>Borrow</button>
+            </a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p>Enter your exactly borrowing code to return book</p>
+<form action="/return" method="post">
+    <input type="number" name="code" placeholder="Enter your exactly borrowing code to return book">
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
