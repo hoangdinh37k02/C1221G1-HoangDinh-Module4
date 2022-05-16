@@ -84,20 +84,12 @@ public class ProductDto implements Validator {
         return false;
     }
 
-    @Autowired
-    private IProductRepository iProductRepository;
+
     @Override
     public void validate(Object target, Errors errors) {
         ProductDto productDto = (ProductDto) target;
         if (productDto.getProductName().contains("@")){
             errors.rejectValue("productName", "name","default error");
-        }
-
-        List<Product> productList = this.iProductRepository.findAll();
-        for (Product product :productList) {
-            if (productDto.getProductCode().equals(product.getProductCode())){
-                errors.rejectValue("productCode","code","default error");
-            }
         }
     }
 }
