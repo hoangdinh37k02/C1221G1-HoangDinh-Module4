@@ -23,7 +23,7 @@ public class LogAspect {
     public void beforeCallHome(JoinPoint joinPoint){
     count +=1;
         System.err.println("Start method name: "+joinPoint.getSignature().getName()+
-                ", Time: "+ LocalDateTime.now()+ ", Số lần vào trang chủ: "+count);
+                ", Time: "+ LocalDateTime.now()+ ", The number that client visit home page: "+count);
     }
 
 
