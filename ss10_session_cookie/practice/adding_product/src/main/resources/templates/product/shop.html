@@ -8,7 +8,7 @@
 <body>
 <nav th:replace="~{layout :: nav}"></nav>
 <h2>
-    <a href="/shopping-cart"><button class="btn btn-success">Your cart</button></a>
+    <a href="/cart"><button class="btn btn-primary">Your cart</button></a>
 </h2>
 <!--<table class="table table-striped table-bordered table-hover">-->
 <!--    <tr>-->
@@ -46,7 +46,7 @@
                 <!--                <p class="card-text text-danger">Số lượng còn lại : <span class="text-secondary" th:text="${book.quantity}"></span> quyển</p>-->
 
                 <div class="card-footer px-0 text-center">
-                    <a th:href="@{/add/__${product.id}__(action='list')}">
+                    <a th:href="@{/add/__${product.id}__}">
                         <button class="btn btn-primary">Add To Cart</button></a>
                 </div>
 

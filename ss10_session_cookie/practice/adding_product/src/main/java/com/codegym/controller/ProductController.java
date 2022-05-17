@@ -2,7 +2,6 @@ package com.codegym.controller;
 
 import com.codegym.dto.CartDto;
 import com.codegym.dto.ProductDto;
-import com.codegym.model.Cart;
 import com.codegym.model.Product;
 import com.codegym.service.IProductService;
 import org.springframework.beans.BeanUtils;
@@ -20,8 +19,8 @@ public class ProductController {
     private IProductService productService;
 
     @ModelAttribute("cart")
-    public Cart setupCart() {
-        return new Cart();
+    public CartDto setupCart() {
+        return new CartDto();
     }
 
     @GetMapping({"/shop","/"})
@@ -35,14 +34,43 @@ public class ProductController {
 //        return modelAndView;
 //    }
     @GetMapping("/add/{id}")
-    public String addToCart(@PathVariable Long id, @SessionAttribute("cart") CartDto cartDto) {
+    public String addToCart(@PathVariable Long id,
+                            @SessionAttribute("cart") CartDto cartDto) {
         Optional<Product> productOptional = productService.findById(id);
         if (productOptional.isPresent()){
             ProductDto productDto = new ProductDto();
-            BeanUtils.copyProperties(productOptional,productDto);
+            BeanUtils.copyProperties(productOptional.get(),productDto);
             cartDto.addProduct(productDto);
         }
-        return "redirect:/cart/cart";
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/sub/{id}")
+    public String subToCart(@PathVariable Long id,
+                            @SessionAttribute("cart") CartDto cartDto) {
+        Optional<Product> productOptional = productService.findById(id);
+        if (productOptional.isPresent()){
+            ProductDto productDto = new ProductDto();
+            BeanUtils.copyProperties(productOptional.get(),productDto);
+            cartDto.subProduct(productDto);
+        }
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id,
+                         @SessionAttribute("cart") CartDto cartDto){
+        Optional<Product> productOptional = productService.findById(id);
+        ProductDto productDto = new ProductDto();
+        BeanUtils.copyProperties(productOptional.get(),productDto);
+        cartDto.deleteProduct(productDto);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/pay")
+    public String pay(@SessionAttribute("cart") CartDto cartDto){
+        cartDto.deleteAll();
+        return "redirect:/shop";
     }
 
 }

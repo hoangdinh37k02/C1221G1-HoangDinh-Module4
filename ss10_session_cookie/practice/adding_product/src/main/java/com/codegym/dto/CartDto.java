@@ -25,4 +25,30 @@ public class CartDto {
             productMap.put(productDto,1);
         }
     }
+
+    public void subProduct(ProductDto productDto) {
+
+        Integer currentValue = productMap.get(productDto);
+        if (currentValue == 0) {
+            productMap.put(productDto, currentValue);
+        } else {
+            productMap.put(productDto, currentValue - 1);
+        }
+    }
+
+    public void deleteProduct(ProductDto productDto) {
+        productMap.remove(productDto);
+    }
+
+    public void deleteAll(){
+        productMap.clear();
+    }
+
+    public Float totalPayment(){
+        float payment = 0;
+        for (Map.Entry<ProductDto, Integer> entry : productMap.entrySet()) {
+            payment += entry.getKey().getPrice() * (float) entry.getValue();
+        }
+        return payment;
+    }
 }

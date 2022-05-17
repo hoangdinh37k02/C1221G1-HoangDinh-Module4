@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <th:blook th:replace="~{layout :: bootstrap}"></th:blook>
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<h2>
+    <a href="/shop"><button class="btn btn-primary">Home</button></a>
+</h2>
+<table class="table">
+    <thead>
+    <th>Name</th>
+    <th>Image</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Delete</th>
+    </thead>
+    <tbody>
+    <tr th:each="productMap: ${cart.productMap}">
+        <td th:text="${productMap.key.name}"></td>
+        <td>
+            <img th:src="${productMap.key.img}" style="width: 170px; height: auto">
+        </td>
+        <td th:text="${productMap.key.price}"></td>
+        <td>
+            <a th:href="@{/sub/__${productMap.getKey().id}__}"
+               th:text="${'-'}"></a>
+            <span th:text="${productMap.value}"></span>
+            <a th:href="@{/add/__${productMap.getKey().id}__}"
+               th:text="${'+'}"></a>
+        </td>
+        <td>
+            <a th:href="@{/delete/__${productMap.getKey().id}__}">
+                <button class="btn btn-primary">Delete</button>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">Total</td>
+        <td colspan="1" th:text="${cart.totalPayment()}"></td>
+        <td>
+            <a th:href="@{/pay}">
+                <button class="btn btn-primary">Payment</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="~{layout :: foot}"></footer>
+<div th:replace="~{layout :: bootstrap1}"></div>
+</body>
+</html>
