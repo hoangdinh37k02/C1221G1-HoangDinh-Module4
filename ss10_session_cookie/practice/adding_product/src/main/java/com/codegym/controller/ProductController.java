@@ -6,6 +6,8 @@ import com.codegym.model.Product;
 import com.codegym.service.IProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,15 +26,14 @@ public class ProductController {
     }
 
     @GetMapping({"/shop","/"})
-    public String showShop(Model model){
-        model.addAttribute("products", productService.findAll());
+    public String showShop(Model model, @PageableDefault(value = 4)Pageable pageable,
+                           @RequestParam Optional<String> name){
+        String nameVal = name.orElse("");
+        model.addAttribute("products", productService.findAll(nameVal, pageable));
+        model.addAttribute("nameVal", nameVal);
         return "product/shop";
     }
-//    public ModelAndView showShop() {
-//        ModelAndView modelAndView = new ModelAndView("/shop");
-//        modelAndView.addObject("products", productService.findAll());
-//        return modelAndView;
-//    }
+
     @GetMapping("/add/{id}")
     public String addToCart(@PathVariable Long id,
                             @SessionAttribute("cart") CartDto cartDto) {

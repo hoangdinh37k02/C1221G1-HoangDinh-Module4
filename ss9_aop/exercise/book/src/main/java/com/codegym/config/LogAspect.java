@@ -30,7 +30,7 @@ public class LogAspect {
     @Before("allMethodPointCut()")
     public void beforeCallMethod(JoinPoint joinPoint){
         System.err.println("Start method name: "+joinPoint.getSignature().getName()+
-                ", Time: "+ LocalDateTime.now());
+                ", start to borrow book from the library, Time: "+ LocalDateTime.now());
     }
     @AfterReturning("allMethodPointCut()")
     public void afterReturningCallMethod(JoinPoint joinPoint){
