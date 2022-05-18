@@ -16,4 +16,9 @@ public class BlogTypeService implements IBlogTypeService {
     public List<BlogType> findAll() {
         return this.iBlogTypeRepository.findAll();
     }
+
+    @Override
+    public BlogType findById(Integer id) {
+        return this.iBlogTypeRepository.findById(id).orElse(null);
+    }
 }

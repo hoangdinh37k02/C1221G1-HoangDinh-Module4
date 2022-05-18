@@ -1,6 +1,8 @@
 package com.codegym.dto;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class CartDto {
@@ -44,11 +46,22 @@ public class CartDto {
         productMap.clear();
     }
 
-    public Float totalPayment(){
-        float payment = 0;
-        for (Map.Entry<ProductDto, Integer> entry : productMap.entrySet()) {
-            payment += entry.getKey().getPrice() * (float) entry.getValue();
-        }
-        return payment;
+//    public Float totalPayment(){
+//        float payment = 0;
+//        for (Map.Entry<ProductDto, Integer> entry : productMap.entrySet()) {
+//            payment += entry.getKey().getPrice() * (float) entry.getValue();
+//        }
+//        return payment;
+//    }
+public String totalPayment(){
+    Locale locale = new Locale("vi","vn");
+    NumberFormat vn = NumberFormat.getInstance(locale);
+
+    float payment = 0;
+    for (Map.Entry<ProductDto, Integer> entry : productMap.entrySet()) {
+        payment += entry.getKey().getPrice() * (float) entry.getValue();
     }
+
+    return vn.format(payment);
+}
 }

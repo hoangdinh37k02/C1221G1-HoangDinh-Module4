@@ -1,5 +1,7 @@
 package com.codegym.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -12,6 +14,7 @@ public class BlogType {
     @Id
     private Integer id;
     private String name;
+    @JsonBackReference
     @OneToMany(mappedBy = "blogType")
     private List<Blog> blogList;
 

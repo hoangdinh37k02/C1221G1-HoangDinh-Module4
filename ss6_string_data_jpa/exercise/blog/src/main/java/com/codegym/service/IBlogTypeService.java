@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IBlogTypeService {
     List<BlogType> findAll();
+
+    BlogType findById(Integer id);
 }

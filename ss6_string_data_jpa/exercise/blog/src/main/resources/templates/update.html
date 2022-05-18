@@ -8,13 +8,14 @@
 <body>
 <nav th:replace="~{layout :: nav}"></nav>
     <h2>Update Blog</h2>
-    <form action="/update" th:object="${blog}" method="post">
+    <form action="/update" th:object="${blogDto}" method="post">
         <table class="table table-striped table-bordered">
             <input type="hidden" th:field="*{blogId}">
             <tr>
                 <th>Blog Name</th>
                 <td>
                     <input type="text" th:field="*{blogName}">
+                    <p style="color: red" th:if="${#fields.hasErrors('blogName')}" th:errors="*{blogName}"></p>
                 </td>
             </tr>
             <tr>
@@ -30,6 +31,7 @@
                 <th>Summary</th>
                 <td>
                     <textarea th:cols="150" th:rows="5" type="text" th:field="*{blogSummary}"/>
+                    <p style="color: red" th:if="${#fields.hasErrors('blogSummary')}" th:errors="*{blogSummary}"></p>
                 </td>
             </tr>
         </table>
