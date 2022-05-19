@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss1_string_mvc/practice/customer_management/customer-management" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss2_string_controller/practice/customer_management/customer-management" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ss5_orm/practice/customer_management/customer-management" vcs="Git" />
+  </component>
+</project>

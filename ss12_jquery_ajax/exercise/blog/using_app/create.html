@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Blog</title>
+    <link rel="stylesheet" href="css/mdb.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row w-50 mx-auto">
+        <div class="col-lg-12">
+            <h2>Create New Blog</h2>
+            <div>
+                <p style="color: red" id="pError"></p>
+            </div>
+            <div class="form-outline mb-4">
+                <input type="text" id="inputName" class="form-control" />
+                <label class="form-label" for="inputName">Name</label>
+            </div>
+
+            <select id="selectClass" class="form-control mb-4">
+                <option value="1">Sport</option>
+                <option value="2">Music</option>
+                <option value="3">Travel</option>
+                <option value="4">Movie</option>
+            </select>
+
+            <div class="form-outline mb-4">
+                <label class="form-label" for="inputName">Summary</label>
+                <textarea class="form-control" name="" id="inputSummary" cols="30" rows="5"></textarea>
+            </div>
+
+            <button id="btnCreate" type="button" class="btn btn-primary btn-block">
+                Create
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/mdb.min.js"></script>
+
+<script>
+    $("#btnCreate").click(function () {
+        let inputName = $("#inputName").val();
+        let inputType = $("#selectClass").val();
+        let inputSummary = $("#inputSummary").val();
+        let blog={
+            "blogName":inputName,
+            "blogSummary":inputSummary,
+            "blogType":{
+                "id":inputType
+            }
+        }
+
+        console.log(blog)
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST", //GET, DELETE, PUT...
+            url: "http://localhost:8080/blogRest/create",
+            data: JSON.stringify(blog),
+            success: function(resultSuccess){
+                alert("OK");
+            },
+            error: function(resultError) {
+                console.log(resultError);
+                $("#pError").text(resultError.responseJSON[0].defaultMessage);
+            }
+        });
+    })
+</script>
+
+</body>
+</html>
