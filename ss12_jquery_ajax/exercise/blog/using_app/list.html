@@ -23,7 +23,6 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">No</th>
                     <th scope="col">Blog Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Type</th>
@@ -41,14 +40,14 @@
 
     <nav aria-label="..." class="d-flex justify-content-center">
         <ul class="pagination">
+<!--            <li class="page-item">-->
+<!--                <a class="page-link" href="#" id="aPrevious">Previous</a>-->
+<!--            </li>-->
+<!--            <li class="page-item disabled" >-->
+<!--                <a class="page-link" id="pageNumber"></a>-->
+<!--            </li>-->
             <li class="page-item">
-                <a class="page-link" href="#" id="aPrevious">Previous</a>
-            </li>
-            <li class="page-item disabled" >
-                <a class="page-link" id="pageNumber"></a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#" id="aNext">Next</a>
+                <a class="page-link" href="#" id="aNext">Load More</a>
             </li>
         </ul>
     </nav>
@@ -76,21 +75,26 @@
 
                 for (let i = 0; i < pageBlog.content.length; i++) {
                     outHTML += `<tr>
-                                <td>${i + 1}</td>
+
                                 <td>${pageBlog.content[i].blogId}</td>
                                 <td>${pageBlog.content[i].blogName}</td>
                                 <td>${pageBlog.content[i].blogType.name}</td>
                                 <td>${pageBlog.content[i].blogSummary}</td>
 
                                 <td>
-                                    <a href="#">Update</a>
+                                    <a th:href="@{/update(id=${pageBlog.content[i].blogId})}">
+                                        <button class="btn btn-primary">Update</button>
+                                    </a>
                                 </td>
                                 <td>
-                                    <a href="#">Delete</a>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                                        th:attr="onclick=|deleteModal('${pageBlog.content[i].blogId}', '${pageBlog.content[i].blogName}')|">
+                                            Delete
+                                    </button>
                                 </td>
-                            </tr>`;
+                                </tr>`;
                 }
-                $("#bodyStudent").html(outHTML);
+                $("#bodyStudent").append(outHTML);
 
                 $("#pageNumber").html(showPage);
 
@@ -104,63 +108,20 @@
     getBlog("",curPage);
 
     $("#btnSearch").click(function () {
-        let name = $("#keyword").val()
-        getBlog(name,curPage)
+        let name = $("#keyword").val();
+        curPage = 0;
+        getBlog(name,curPage);
     })
 
     $("#aNext").click(function() {
         curPage++;
-        let name = $("#keyword").val()
+        let name = $("#keyword").val();
         getBlog(name,curPage);
     })
-    $("#aPrevious").click(function() {
-        curPage--;
-        let name = $("#keyword").val()
-        getBlog(name,curPage);
-    })
-    // //search by name
-    // $("#btnSearch").click(function () {
+    // $("#aPrevious").click(function() {
+    //     curPage--;
     //     let name = $("#keyword").val();
-    //     console.log(name);
-    //
-    //     $.ajax({
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         type: "GET", //GET, DELETE, PUT...
-    //         url: "http://localhost:8080/blogRest/list?name="+name,
-    //         success: function (pageBlog) {
-    //             console.log(pageBlog);
-    //             let outHTML = "";
-    //             let totalPage =pageBlog.totalPages;
-    //             let showPage = pageNumber+1 +"/"+totalPage;
-    //
-    //             for (let i = 0; i < pageBlog.content.length; i++) {
-    //                 outHTML += `<tr>
-    //                             <td>${i + 1}</td>
-    //                             <td>${pageBlog.content[i].blogId}</td>
-    //                             <td>${pageBlog.content[i].blogName}</td>
-    //                             <td>${pageBlog.content[i].blogType.name}</td>
-    //                             <td>${pageBlog.content[i].blogSummary}</td>
-    //
-    //                             <td>
-    //                                 <a href="#">Update</a>
-    //                             </td>
-    //                             <td>
-    //                                 <a href="#">Delete</a>
-    //                             </td>
-    //                         </tr>`;
-    //             }
-    //             $("#bodyStudent").html(outHTML);
-    //
-    //             $("#pageNumber").html(showPage);
-    //
-    //         },
-    //         error: function (resultError) {
-    //             console.log(resultError)
-    //         }
-    //     });
+    //     getBlog(name,curPage);
     // })
 
 
