@@ -58,7 +58,8 @@
 <script src="js/mdb.min.js"></script>
 <script>
     let curPage = 0;
-    function getBlog(name,pageNumber) {
+    let countSearch = 0;
+    function getBlog(nameSearch,pageNumber) {
 
         $.ajax({
             headers: {
@@ -66,7 +67,7 @@
                 'Content-Type': 'application/json'
             },
             type: "GET", //GET, DELETE, PUT...
-            url: "http://localhost:8080/blogRest/list?name="+name+"&page="+pageNumber,
+            url: "http://localhost:8080/blogRest/list?name="+nameSearch+"&page="+pageNumber,
             success: function (pageBlog) {
                 console.log(pageBlog);
                 let outHTML = "";
@@ -94,9 +95,27 @@
                                 </td>
                                 </tr>`;
                 }
-                $("#bodyStudent").append(outHTML);
+                if (nameSearch==""){
+                    if (flag==true&&countSearch==0){
+                        $("#bodyStudent").html(outHTML);
+                        countSearch++;
+                    } else {
+                        $("#bodyStudent").append(outHTML);
+                        // countSearch=0;
+                    }
 
-                $("#pageNumber").html(showPage);
+                } else {
+                    if (countSearch==0){
+                        countSearch++;
+                        $("#bodyStudent").html(outHTML);
+                    } else {
+                        $("#bodyStudent").append(outHTML);
+                    }
+                }
+
+                // $("#bodyStudent").append(outHTML);
+
+                // $("#pageNumber").html(showPage);
 
             },
             error: function (resultError) {
@@ -106,10 +125,12 @@
     }
 
     getBlog("",curPage);
-
+    let flag = false;
     $("#btnSearch").click(function () {
+        flag=true;
         let name = $("#keyword").val();
         curPage = 0;
+
         getBlog(name,curPage);
     })
 
