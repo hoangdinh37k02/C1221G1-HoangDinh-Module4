@@ -15,7 +15,7 @@ public class UserRole {
 
     @ManyToOne
     @JoinColumn(name = "User_Id", nullable = false)
-    private codegym.danang.demo.entity.AppUser appUser;
+    private com.codegym.entity.AppUser appUser;
 
     @ManyToOne
     @JoinColumn(name = "Role_Id", nullable = false)
@@ -29,11 +29,11 @@ public class UserRole {
         this.id = id;
     }
 
-    public codegym.danang.demo.entity.AppUser getAppUser() {
+    public com.codegym.entity.AppUser getAppUser() {
         return appUser;
     }
 
-    public void setAppUser(codegym.danang.demo.entity.AppUser appUser) {
+    public void setAppUser(com.codegym.entity.AppUser appUser) {
         this.appUser = appUser;
     }
 

@@ -1,6 +1,5 @@
 package com.codegym.config;
 
-
 import com.codegym.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +23,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
+    
+//    @Bean
+//    public DataSource dataSource(){
+//
+//        return dataSource;
+//    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

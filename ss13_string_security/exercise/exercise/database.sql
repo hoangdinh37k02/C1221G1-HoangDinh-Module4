@@ -1,6 +1,6 @@
-drop database if exists login_demo;
-create database login_demo;
- use login_demo;
+drop database if exists demo_string_security;
+create database demo_string_security;
+ use demo_string_security;
  create table APP_USER
  ( USER_ID BIGINT not null,
  USER_NAME VARCHAR(36) not null,
