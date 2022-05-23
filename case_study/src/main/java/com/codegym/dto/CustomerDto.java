@@ -1,14 +1,8 @@
 package com.codegym.dto;
 
-import com.codegym.model.CustomerType;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.codegym.model.customer.CustomerType;
 
 public class CustomerDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int CustomerId;
     private String customerName;
     private String birthDay;

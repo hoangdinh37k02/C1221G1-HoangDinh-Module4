@@ -1,9 +1,9 @@
 package com.codegym.controller;
 
 import com.codegym.dto.CustomerDto;
-import com.codegym.model.Customer;
-import com.codegym.service.ICustomerService;
-import com.codegym.service.ICustomerTypeService;
+import com.codegym.model.customer.Customer;
+import com.codegym.service.customer.ICustomerService;
+import com.codegym.service.customer.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class CustomerController {
     @Autowired
     private ICustomerTypeService iCustomerTypeService;
 
-    @GetMapping("/list")
+    @GetMapping({"/list","/"})
     public String getCustomerList(Model model, @PageableDefault(value = 3) Pageable pageable,
                            @RequestParam Optional<String> name) {
         String nameVal = name.orElse("");
@@ -44,16 +45,18 @@ public class CustomerController {
     @PostMapping(value = "/create")
     public String createProduct(@ModelAttribute @Validated CustomerDto customerDto,
                                 BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes,
                                 Model model){
 //        new CustomerDto().validate(customerDto,bindingResult);
         if (bindingResult.hasFieldErrors()){
             model.addAttribute("customerType", this.iCustomerTypeService.findAll());
-            return "create";
+            return "customer/create";
         } else {
             Customer customer=new Customer();
             BeanUtils.copyProperties(customerDto,customer);
             this.iCustomerService.save(customer);
         }
+        redirectAttributes.addFlashAttribute("message", "Creation successful");
         return "redirect:/customer/list";
     }
 
@@ -70,5 +73,23 @@ public class CustomerController {
         model.addAttribute("customerDto", customerDto);
         model.addAttribute("customerType", this.iCustomerTypeService.findAll());
         return "customer/update";
+    }
+
+    @PostMapping(value = "/update")
+    public String updateCustomer(@ModelAttribute @Validated CustomerDto customerDto,
+                                BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes,
+                                Model model){
+//        new CustomerDto().validate(customerDto,bindingResult);
+        if (bindingResult.hasFieldErrors()){
+            model.addAttribute("customerType", this.iCustomerTypeService.findAll());
+            return "customer/update";
+        } else {
+            Customer customer=new Customer();
+            BeanUtils.copyProperties(customerDto,customer);
+            this.iCustomerService.save(customer);
+        }
+        redirectAttributes.addFlashAttribute("message", "Updating successful");
+        return "redirect:/customer/list";
     }
 }

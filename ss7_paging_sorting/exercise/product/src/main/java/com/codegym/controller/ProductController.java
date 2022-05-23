@@ -101,7 +101,7 @@ public class ProductController {
         new ProductDto().validate(productDto,bindingResult);
         if (bindingResult.hasFieldErrors()){
             model.addAttribute("productTypeList", this.iProductTypeService.findAll());
-            return "create";
+            return "update";
         } else {
             Product product=new Product();
             BeanUtils.copyProperties(productDto,product);

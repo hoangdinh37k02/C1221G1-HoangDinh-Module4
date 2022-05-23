@@ -1,6 +1,6 @@
-package com.codegym.service;
+package com.codegym.service.customer;
 
-import com.codegym.model.Customer;
+import com.codegym.model.customer.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
