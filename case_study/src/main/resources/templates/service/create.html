@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Service</title>
+    <th:blook th:replace="~{layout :: bootstrap}"></th:blook>
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+
+<center>
+    <h2>Create New Service</h2>
+
+    <a href="/service/list"><button class="btn btn-primary"> Back to List Service</button></a>
+</center>
+<div align="center" class="container">
+    <div class="row">
+        <div class="col-lg-3"> </div>
+        <div class="col-lg-6">
+            <form action="" th:object="${serviceDto}" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Service Name</label>
+                    <input type="text" th:field="*{serviceName}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Service Name">
+                    <p style="color: red" th:if="${#fields.hasErrors('serviceName')}" th:errors="*{serviceName}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Service Area</label>
+                    <input type="text" th:field="*{serviceArea}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Service Area">
+                    <p style="color: red" th:if="${#fields.hasErrors('serviceArea')}" th:errors="*{serviceArea}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Service Cost</label>
+                    <input type="text" th:field="*{serviceCost}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Service Cost">
+                    <p style="color: red" th:if="${#fields.hasErrors('serviceCost')}" th:errors="*{serviceCost}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Maximum People</label>
+                    <input type="text" th:field="*{serviceMaxPeople}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter maximum people">
+                    <p style="color: red" th:if="${#fields.hasErrors('serviceMaxPeople')}" th:errors="*{serviceMaxPeople}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Standard Room</label>
+                    <input type="text" th:field="*{standardRoom}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Standard Room">
+                    <p style="color: red" th:if="${#fields.hasErrors('standardRoom')}" th:errors="*{standardRoom}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Other Convenience</label>
+                    <input type="text" th:field="*{otherConvenience}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Other Convenience">
+                    <p style="color: red" th:if="${#fields.hasErrors('otherConvenience')}" th:errors="*{otherConvenience}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Pool Area</label>
+                    <input type="text" th:field="*{poolArea}" class="form-control" id="exampleInputEmail1"
+                           aria-describedby="emailHelp" placeholder="Enter Pool Area">
+                    <p style="color: red" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Number Of Floor</label>
+                    <input type="text" th:field="*{numberOfFloor}" class="form-control" id="exampleInputEmail1"
+                           aria-describedby="emailHelp" placeholder="Enter Number Of Floor">
+                    <p style="color: red" th:if="${#fields.hasErrors('numberOfFloor')}" th:errors="*{numberOfFloor}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Rent Type</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{rentType}">
+                        <option th:each="rentType:${rentType}"
+                                th:value="${rentType.id}"
+                                th:text="${rentType.name}"
+                        ></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Education Decree</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{serviceType}">
+                        <option th:each="serviceType1:${serviceType}"
+                                th:value="${serviceType1.id}"
+                                th:text="${serviceType1.name}"
+                        ></option>
+                    </select>
+                </div>
+
+                <center>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </center>
+            </form>
+        </div>
+        <div class="col-lg-3"> </div>
+    </div>
+
+</div>
+
+<footer th:replace="~{layout :: foot}"></footer>
+<div th:replace="~{layout :: bootstrap1}"></div>
+
+</body>
+</html>

@@ -2,13 +2,20 @@ package com.codegym.dto;
 
 import com.codegym.model.customer.CustomerType;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+
 public class CustomerDto {
     private int CustomerId;
+    @Pattern(regexp = "^([A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+\\s{0,}){1,}$", message = "Not null or number in name")
     private String customerName;
     private String birthDay;
     private int gender;
+    @Pattern(regexp = "^([0-9]{9})|([0-9]{12})$", message = "The ID Card include 9 or 12 number")
     private String idCard;
+    @Pattern(regexp = "^([0]{1}[0-9]{9})$", message = "phone number must start by number 0 and include 10 number")
     private String phone;
+    @Email
     private String email;
     private String address;
     private CustomerType customerType;

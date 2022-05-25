@@ -35,7 +35,7 @@ public class EmployeeController {
     private IEducationService iEducationService;
 
     @GetMapping({"/list","/"})
-    public String getCustomerList(Model model, @PageableDefault(value = 3) Pageable pageable,
+    public String getCustomerList(Model model, @PageableDefault(value = 5) Pageable pageable,
                                   @RequestParam Optional<String> name) {
         String nameVal = name.orElse("");
         model.addAttribute("employee", iEmployeeService.findAll(nameVal, pageable));
@@ -99,6 +99,14 @@ public class EmployeeController {
             this.iEmployeeService.save(employee);
         }
         redirectAttributes.addFlashAttribute("message", "Updating successful");
+        return "redirect:/employee/list";
+    }
+
+    @GetMapping(value = "/delete")
+    public String deleteProduct(@RequestParam("employeeId") int employeeId,
+                                RedirectAttributes redirectAttributes){
+        this.iEmployeeService.deleteById(employeeId);
+        redirectAttributes.addFlashAttribute("message", "Deleting successful");
         return "redirect:/employee/list";
     }
 }

@@ -6,6 +6,7 @@ import com.codegym.service.customer.ICustomerService;
 import com.codegym.service.customer.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,25 @@ public class CustomerController {
     private ICustomerTypeService iCustomerTypeService;
 
     @GetMapping({"/list","/"})
-    public String getCustomerList(Model model, @PageableDefault(value = 3) Pageable pageable,
-                           @RequestParam Optional<String> name) {
+    public String getCustomerList(Model model, @PageableDefault(value = 5) Pageable pageable,
+                           @RequestParam Optional<String> name, @RequestParam Optional<String> email,
+                                  @RequestParam Optional<String> type) {
         String nameVal = name.orElse("");
-        model.addAttribute("customer", iCustomerService.findAll(nameVal, pageable));
+        String emailVal = email.orElse("");
+        String typeVal = type.orElse("");
+        Page<Customer> customerPage = null;
+        if (typeVal.equals("")){
+            customerPage = this.iCustomerService.find1(nameVal,emailVal,pageable);
+        } else {
+            customerPage=this.iCustomerService.find2(nameVal,emailVal,typeVal,pageable);
+
+        }
+//        model.addAttribute("customer", iCustomerService.findAll(nameVal, pageable));
+        model.addAttribute("customer", customerPage);
         model.addAttribute("nameVal", nameVal);
+        model.addAttribute("typeVal", typeVal);
+        model.addAttribute("emailVal", emailVal);
+        model.addAttribute("customerType", this.iCustomerTypeService.findAll());
         return "customer/list";
     }
 
@@ -61,8 +76,10 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/delete")
-    public String deleteProduct(@RequestParam("customerId") int customerId){
+    public String deleteProduct(@RequestParam("customerId") int customerId,
+                                RedirectAttributes redirectAttributes){
         this.iCustomerService.deleteCustomer(customerId);
+        redirectAttributes.addFlashAttribute("message", "Deleting successful");
         return "redirect:/customer/list";
     }
 
@@ -77,8 +94,7 @@ public class CustomerController {
 
     @PostMapping(value = "/update")
     public String updateCustomer(@ModelAttribute @Validated CustomerDto customerDto,
-                                BindingResult bindingResult,
-                                 RedirectAttributes redirectAttributes,
+                                BindingResult bindingResult, RedirectAttributes redirectAttributes,
                                 Model model){
 //        new CustomerDto().validate(customerDto,bindingResult);
         if (bindingResult.hasFieldErrors()){

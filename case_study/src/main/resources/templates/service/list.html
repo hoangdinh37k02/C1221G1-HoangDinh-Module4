@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Service</title>
+    <th:blook th:replace="~{layout :: bootstrap}"></th:blook>
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<center>
+    <h2>List Service</h2>
+    <h2>
+        <a href="/service/create"><button class="btn btn-primary">Create New Service</button></a>
+    </h2>
+    <div class="container">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <form action="/service/list" method="get" class="d-flex input-group w-auto">
+                <input type="search" class="form-control" placeholder="Enter Name" aria-label="Search" name="name">
+
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+    <p th:text="${message}" style="color: violet; font-size: 50px"></p>
+</center>
+<div align="center" class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-striped table-bordered table-hover" style="width:100%">
+                <thead>
+                <th>#</th>
+                <th>Service ID</th>
+                <th>Service Name</th>
+                <th>Service Area</th>
+                <th>Service Cost</th>
+                <th>Maximum People</th>
+                <th>Standard Room</th>
+                <th>Note</th>
+                <th>Pool Area</th>
+                <th>Floor</th>
+                <th>Rent Type</th>
+                <th>Service Type</th>
+
+                <th>Delete</th>
+                <th>Update</th>
+                </thead>
+                <tbody>
+                <tr th:each="serviceObj,no : ${service}">
+                    <td th:text="${no.count}"></td>
+                    <td th:text="${serviceObj.serviceId}"></td>
+                    <td th:text="${serviceObj.serviceName}"></td>
+                    <td th:text="${serviceObj.serviceArea}"></td>
+                    <td th:text="${serviceObj.serviceCost}"></td>
+                    <td th:text="${serviceObj.serviceMaxPeople}"></td>
+                    <td th:text="${serviceObj.standardRoom}"></td>
+                    <td th:text="${serviceObj.otherConvenience}"></td>
+                    <td th:text="${serviceObj.poolArea}"></td>
+                    <td th:text="${serviceObj.numberOfFloor}"></td>
+                    <td th:text="${serviceObj.rentType.name}"></td>
+                    <td th:text="${serviceObj.serviceType.name}"></td>
+
+
+                    <td>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                th:attr="onclick=|deleteModal('${serviceObj.serviceId}', '${serviceObj.serviceName}')|">
+                            Delete
+                        </button>
+                    </td>
+
+                    <td>
+                        <a th:href="@{/service/update(serviceId=${serviceObj.serviceId})}">
+                            <button class="btn btn-primary">Update</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<div>
+    <a th:if="${service.hasPrevious()}"
+       th:href="@{/service/list(page=${service.number-1},name=${nameVal})}">Previous</a>
+    <span th:text="${service.number+1}"></span>/ <span th:text="${service.totalPages}"></span>
+    <a th:if="${service.hasNext()}"
+       th:href="@{/service/list(page=${service.number+1},name=${nameVal})}">Next</a>
+</div>
+
+<form th:action="@{/service/delete}">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="serviceIdMove" name="serviceId">
+                    Do you want to delete this service: <br>
+                    Service Name:  <p id="serviceName"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    function deleteModal(serviceId,serviceName){
+        document.getElementById("serviceIdMove").value=serviceId;
+        document.getElementById("serviceName").innerText=serviceName;
+    }
+</script>
+
+<footer th:replace="~{layout :: foot}"></footer>
+<div th:replace="~{layout :: bootstrap1}"></div>
+
+
+
+</body>
+</html>

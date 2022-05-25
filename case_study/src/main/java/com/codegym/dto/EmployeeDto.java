@@ -4,13 +4,21 @@ import com.codegym.model.employee.Division;
 import com.codegym.model.employee.Education;
 import com.codegym.model.employee.Position;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+
 public class EmployeeDto {
     private int employeeId;
+    @Pattern(regexp = "^([A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+\\s{0,}){1,}$", message = "Not null or number in name")
     private String employeeName;
     private String birthDay;
+    @Pattern(regexp = "^([0-9]{9})|([0-9]{12})$", message = "The ID Card include 9 or 12 number")
     private String idCard;
+    @Pattern(regexp = "^[1-9]{1}[0-9]{0,}$",message = "must be postive")
     private String salary;
+    @Pattern(regexp = "^([0]{1}[0-9]{9})$", message = "phone number must start by number 0 and include 10 number")
     private String phone;
+    @Email
     private String email;
     private String address;
     private Position position;

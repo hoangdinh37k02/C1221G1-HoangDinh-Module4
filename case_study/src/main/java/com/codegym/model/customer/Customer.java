@@ -1,6 +1,9 @@
 package com.codegym.model.customer;
 
+import com.codegym.model.contract.Contract;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -20,8 +23,18 @@ public class Customer {
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "id")
     private CustomerType customerType;
+    @OneToMany(mappedBy = "customer")
+    private List<Contract> contractList;
 
     public Customer() {
+    }
+
+    public List<Contract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
     }
 
     public CustomerType getCustomerType() {

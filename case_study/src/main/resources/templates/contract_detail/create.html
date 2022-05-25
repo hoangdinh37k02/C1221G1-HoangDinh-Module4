@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Contract Detail</title>
+    <th:blook th:replace="~{layout :: bootstrap}"></th:blook>
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+
+<center>
+    <h2>Create New Contract Detail</h2>
+
+    <a href="/contract_detail/list"><button class="btn btn-primary"> Back to List Contract Detail</button></a>
+</center>
+<div align="center" class="container">
+    <div class="row">
+        <div class="col-lg-3"> </div>
+        <div class="col-lg-6">
+            <form action="" th:object="${contractDetailDto}" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Quantity</label>
+                    <input type="text" th:field="*{quantity}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Quantity">
+                    <p style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Contract</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{contract}">
+                        <option th:each="contractList:${contractList}"
+                                th:value="${contractList.contractId}"
+                                th:text="${contractList.contractId}"
+                        ></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Attached Service</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{attachService}">
+                        <option th:each="add:${attachService}"
+                                th:value="${add.attachServiceId}"
+                                th:text="${add.attachServiceName}"
+                        ></option>
+                    </select>
+                </div>
+                <center>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </center>
+            </form>
+        </div>
+        <div class="col-lg-3"> </div>
+    </div>
+
+</div>
+
+<footer th:replace="~{layout :: foot}"></footer>
+<div th:replace="~{layout :: bootstrap1}"></div>
+
+</body>
+</html>

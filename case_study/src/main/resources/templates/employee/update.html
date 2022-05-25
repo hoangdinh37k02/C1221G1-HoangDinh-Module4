@@ -63,8 +63,8 @@
                         <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Position</label>
-                        <select th:field="*{position}">
+                        <label  for="exampleInputEmail1">Position</label>
+                        <select class="form-select" aria-label="Default select example" th:field="*{position}">
                             <option th:each="positionType:${position}"
                                     th:value="${positionType.id}"
                                     th:text="${positionType.name}"
@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Education Decree</label>
-                        <select th:field="*{education}">
+                        <select class="form-select" aria-label="Default select example" th:field="*{education}">
                             <option th:each="educationType:${education}"
                                     th:value="${educationType.id}"
                                     th:text="${educationType.name}"
@@ -82,7 +82,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Division</label>
-                        <select th:field="*{division}">
+                        <select class="form-select" aria-label="Default select example" th:field="*{division}">
                             <option th:each="divisionType:${division}"
                                     th:value="${divisionType.id}"
                                     th:text="${divisionType.name}"

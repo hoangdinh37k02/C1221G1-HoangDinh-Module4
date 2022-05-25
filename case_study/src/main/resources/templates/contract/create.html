@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Contract</title>
+    <th:blook th:replace="~{layout :: bootstrap}"></th:blook>
+</head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+
+<center>
+    <h2>Create New Contract</h2>
+
+    <a href="/contract/list"><button class="btn btn-primary"> Back to List Contract</button></a>
+</center>
+<div align="center" class="container">
+    <div class="row">
+        <div class="col-lg-3"> </div>
+        <div class="col-lg-6">
+            <form action="" th:object="${contractDto}" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Start Day</label>
+                    <input type="date" th:field="*{startDay}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Start Day">
+                    <p style="color: red" th:if="${#fields.hasErrors('startDay')}" th:errors="*{startDay}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">End Day</label>
+                    <input type="date" th:field="*{endDay}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter End Day">
+                    <p style="color: red" th:if="${#fields.hasErrors('endDay')}" th:errors="*{endDay}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Deposit</label>
+                    <input type="number" th:field="*{deposit}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Deposit">
+                    <p style="color: red" th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Total Money</label>
+                    <input type="text" th:field="*{totalMoney}" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter Total Money">
+                    <p style="color: red" th:if="${#fields.hasErrors('totalMoney')}" th:errors="*{totalMoney}"></p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Customer</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{customer}">
+                        <option th:each="type:${customer}"
+                                th:value="${type.customerId}"
+                                th:text="${type.customerName}"
+                        ></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Employee</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{employee}">
+                        <option th:each="type:${employee}"
+                                th:value="${type.employeeId}"
+                                th:text="${type.employeeName}"
+                        ></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label  for="exampleInputEmail1">Service</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{service}">
+                        <option th:each="type:${service}"
+                                th:value="${type.serviceId}"
+                                th:text="${type.serviceName}"
+                        ></option>
+                    </select>
+                </div>
+
+                <center>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </center>
+            </form>
+        </div>
+        <div class="col-lg-3"> </div>
+    </div>
+
+</div>
+
+<footer th:replace="~{layout :: foot}"></footer>
+<div th:replace="~{layout :: bootstrap1}"></div>
+
+</body>
+</html>
