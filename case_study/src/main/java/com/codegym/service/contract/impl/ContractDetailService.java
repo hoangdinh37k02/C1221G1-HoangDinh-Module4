@@ -22,4 +22,9 @@ public class ContractDetailService implements IContractDetailService {
     public void save(ContractDetail contractDetail) {
         this.iContractDetailRepository.save(contractDetail);
     }
+
+    @Override
+    public void delete(int id) {
+        this.iContractDetailRepository.deleteById(id);
+    }
 }

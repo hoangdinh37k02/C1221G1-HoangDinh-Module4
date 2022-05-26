@@ -1,5 +1,6 @@
 package com.codegym.service.customer.impl;
 
+import com.codegym.model.contract.Contract;
 import com.codegym.model.customer.Customer;
 import com.codegym.repository.customer.ICustomerRepository;
 import com.codegym.service.customer.ICustomerService;
@@ -48,5 +49,20 @@ public class CustomerService implements ICustomerService {
     @Override
     public Page<Customer> find2(String nameVal, String emailVal, String typeVal, Pageable pageable) {
         return this.iCustomerRepository.findAllByCustomerNameContainingAndEmailContainingAndCustomerType_Id(nameVal,emailVal, Integer.parseInt(typeVal),pageable);
+    }
+
+    @Override
+    public Page<Customer> findAllByStatus(int i, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<Customer> find1(int i, String nameVal, String emailVal, Pageable pageable) {
+        return this.iCustomerRepository.findAllByStatusAndCustomerNameContainingAndEmailContaining(0,nameVal,emailVal,pageable);
+    }
+
+    @Override
+    public Page<Customer> find2(int i, String nameVal, String emailVal, String typeVal, Pageable pageable) {
+        return this.iCustomerRepository.findAllByStatusAndCustomerNameContainingAndEmailContainingAndCustomerType_Id(0,nameVal,emailVal, Integer.parseInt(typeVal),pageable);
     }
 }

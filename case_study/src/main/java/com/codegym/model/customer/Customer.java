@@ -25,8 +25,17 @@ public class Customer {
     private CustomerType customerType;
     @OneToMany(mappedBy = "customer")
     private List<Contract> contractList;
+    private int status;
 
     public Customer() {
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public List<Contract> getContractList() {

@@ -32,8 +32,18 @@ public class Contract {
 
     @OneToMany (mappedBy = "contract")
     private List<ContractDetail> contractDetailList;
+    @Column(columnDefinition = "bit default 0")
+    private int status;
 
     public Contract() {
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public List<ContractDetail> getContractDetailList() {

@@ -12,4 +12,10 @@ public interface IContractService {
     void save(Contract contract);
 
     List<Contract> findAll();
+
+    void delete(int id);
+
+    Contract findById(int id);
+
+    Page<Contract> findAllByStatus(int i, Pageable pageable);
 }

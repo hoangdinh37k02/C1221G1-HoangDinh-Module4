@@ -8,4 +8,6 @@ public interface IContractDetailService {
     Page<ContractDetail> findAll(Pageable pageable);
 
     void save(ContractDetail contractDetail);
+
+    void delete(int id);
 }

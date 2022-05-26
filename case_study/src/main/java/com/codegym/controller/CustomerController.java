@@ -36,9 +36,9 @@ public class CustomerController {
         String typeVal = type.orElse("");
         Page<Customer> customerPage = null;
         if (typeVal.equals("")){
-            customerPage = this.iCustomerService.find1(nameVal,emailVal,pageable);
+            customerPage = this.iCustomerService.find1(0,nameVal,emailVal,pageable);
         } else {
-            customerPage=this.iCustomerService.find2(nameVal,emailVal,typeVal,pageable);
+            customerPage=this.iCustomerService.find2(0,nameVal,emailVal,typeVal,pageable);
 
         }
 //        model.addAttribute("customer", iCustomerService.findAll(nameVal, pageable));
@@ -78,7 +78,10 @@ public class CustomerController {
     @GetMapping(value = "/delete")
     public String deleteProduct(@RequestParam("customerId") int customerId,
                                 RedirectAttributes redirectAttributes){
-        this.iCustomerService.deleteCustomer(customerId);
+//        this.iCustomerService.deleteCustomer(customerId);
+        Customer customer = this.iCustomerService.findById(customerId);
+        customer.setStatus(1);
+        this.iCustomerService.save(customer);
         redirectAttributes.addFlashAttribute("message", "Deleting successful");
         return "redirect:/customer/list";
     }

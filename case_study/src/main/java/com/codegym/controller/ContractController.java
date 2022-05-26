@@ -16,10 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -36,7 +33,8 @@ public class ContractController {
 
     @GetMapping({"/list","/"})
     public String showContractList(Model model, @PageableDefault(value = 5) Pageable pageable){
-        model.addAttribute("contractList", this.iContractService.findAll(pageable));
+//        model.addAttribute("contractList", this.iContractService.findAll(pageable));
+        model.addAttribute("contractList", this.iContractService.findAllByStatus(0, pageable));
         return "contract/list";
     }
 
@@ -66,6 +64,17 @@ public class ContractController {
             this.iContractService.save(contract);
         }
         redirectAttributes.addFlashAttribute("message", "Creation successful");
+        return "redirect:/contract/list";
+    }
+
+    @GetMapping(value = "/delete")
+    public String delete(@RequestParam("id") int id,
+                                RedirectAttributes redirectAttributes){
+//        this.iContractService.delete(id);
+        Contract contract = this.iContractService.findById(id);
+        contract.setStatus(0);
+        this.iContractService.save(contract);
+        redirectAttributes.addFlashAttribute("message", "Deleting successful");
         return "redirect:/contract/list";
     }
 }

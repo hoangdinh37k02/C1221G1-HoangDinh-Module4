@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IContractRepository extends JpaRepository<Contract, Integer> {
-    @Override
+
     Page<Contract> findAll(Pageable pageable);
+    Page<Contract> findAllByStatus(int s, Pageable pageable);
 }
