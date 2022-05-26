@@ -39,7 +39,7 @@
             <table class="table table-striped table-bordered table-hover" style="width:100%">
                 <thead>
                 <th>#</th>
-                <th>Service ID</th>
+                <th>Service Code</th>
                 <th>Service Name</th>
                 <th>Service Area</th>
                 <th>Service Cost</th>
@@ -57,7 +57,7 @@
                 <tbody>
                 <tr th:each="serviceObj,no : ${service}">
                     <td th:text="${no.count}"></td>
-                    <td th:text="${serviceObj.serviceId}"></td>
+                    <td th:text="${serviceObj.serviceCode}"></td>
                     <td th:text="${serviceObj.serviceName}"></td>
                     <td th:text="${serviceObj.serviceArea}"></td>
                     <td th:text="${serviceObj.serviceCost}"></td>

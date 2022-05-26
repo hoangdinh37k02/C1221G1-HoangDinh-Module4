@@ -62,13 +62,14 @@ public class CustomerController {
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 Model model){
-//        new CustomerDto().validate(customerDto,bindingResult);
+        new CustomerDto().validate(customerDto,bindingResult);
         if (bindingResult.hasFieldErrors()){
             model.addAttribute("customerType", this.iCustomerTypeService.findAll());
             return "customer/create";
         } else {
             Customer customer=new Customer();
             BeanUtils.copyProperties(customerDto,customer);
+            customer.setCustomerCode("KH-"+getString());
             this.iCustomerService.save(customer);
         }
         redirectAttributes.addFlashAttribute("message", "Creation successful");
@@ -110,5 +111,19 @@ public class CustomerController {
         }
         redirectAttributes.addFlashAttribute("message", "Updating successful");
         return "redirect:/customer/list";
+    }
+
+    public String getString(){
+        String result ="";
+        for (int i=0; i<4; i++){
+            result+=getRandomNumber();
+        }
+        return result;
+    }
+
+    public int getRandomNumber(){
+        int number;
+        number = (int)Math.round(Math.random()*10);
+        return number;
     }
 }

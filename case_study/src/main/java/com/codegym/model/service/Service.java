@@ -12,6 +12,7 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int serviceId;
     private String serviceName;
+    private String serviceCode;
     private int serviceArea;
     private double serviceCost;
     private int serviceMaxPeople;
@@ -30,6 +31,14 @@ public class Service {
     private List<Contract> contractList;
 
     public Service() {
+    }
+
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
     public List<Contract> getContractList() {

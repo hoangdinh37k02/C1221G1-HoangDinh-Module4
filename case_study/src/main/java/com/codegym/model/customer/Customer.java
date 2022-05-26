@@ -11,6 +11,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int CustomerId;
+    private String customerCode;
     private String customerName;
     @Column(columnDefinition = "date")
     private String birthDay;
@@ -28,6 +29,14 @@ public class Customer {
     private int status;
 
     public Customer() {
+    }
+
+    public String getCustomerCode() {
+        return customerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
     }
 
     public int getStatus() {

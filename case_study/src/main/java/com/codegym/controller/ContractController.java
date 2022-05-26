@@ -1,14 +1,12 @@
 package com.codegym.controller;
 
 import com.codegym.dto.ContractDto;
-import com.codegym.dto.CustomerDto;
 import com.codegym.model.contract.Contract;
-import com.codegym.model.customer.Customer;
-import com.codegym.service.MyException;
 import com.codegym.service.contract.IContractService;
 import com.codegym.service.customer.ICustomerService;
 import com.codegym.service.employee.IEmployeeService;
 import com.codegym.service.service.IServiceService;
+import com.codegym.service.service.MyException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/contract")
@@ -44,9 +40,9 @@ public class ContractController {
     @GetMapping(value = "/create")
     public String goCreateForm(Model model){
         model.addAttribute("contractDto",new ContractDto());
-        model.addAttribute("customer", this.iCustomerService.findAll());
-        model.addAttribute("employee", this.iEmployeeService.findAll());
-        model.addAttribute("service", this.iServiceService.findAll());
+        model.addAttribute("customerList", this.iCustomerService.findAll());
+        model.addAttribute("employeeList", this.iEmployeeService.findAll());
+        model.addAttribute("serviceList", this.iServiceService.findAll());
         return "contract/create";
     }
 

@@ -19,6 +19,8 @@
             <div class="col-md-6">
                 <form action="/customer/update" th:object="${customerDto}" method="post">
                     <input type="hidden" th:field="*{customerId}">
+                    <input type="hidden" th:field="*{customerCode}">
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">Customer Name</label>
                         <input type="text" th:field="*{customerName}" class="form-control"

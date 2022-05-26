@@ -66,8 +66,6 @@
                     <td th:text="${contract.employee.employeeName}"></td>
                     <td th:text="${contract.service.serviceName}"></td>
 
-
-
                     <td>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 th:attr="onclick=|deleteModal('${contract.contractId}')|">

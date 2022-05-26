@@ -9,6 +9,7 @@ import javax.validation.constraints.Pattern;
 
 public class CustomerDto implements Validator {
     private int CustomerId;
+    private String customerCode;
     @Pattern(regexp = "^([A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+\\s{0,}){1,}$", message = "Not null or number in name")
     private String customerName;
     private String birthDay;
@@ -23,6 +24,14 @@ public class CustomerDto implements Validator {
     private CustomerType customerType;
 
     public CustomerDto() {
+    }
+
+    public String getCustomerCode() {
+        return customerCode;
+    }
+
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
     }
 
     public int getCustomerId() {

@@ -60,6 +60,7 @@ public class ServiceController {
         } else {
             Service service=new Service();
             BeanUtils.copyProperties(serviceDto,service);
+            service.setServiceCode("DV-"+getString());
             this.iServiceService.save(service);
         }
         redirectAttributes.addFlashAttribute("message", "Creation successful");
@@ -72,5 +73,21 @@ public class ServiceController {
         this.iServiceService.deleteById(serviceId);
         redirectAttributes.addFlashAttribute("message", "Deleting successful");
         return "redirect:/service/list";
+    }
+
+    public String getString(){
+        String result ="";
+        for (int i=0; i<4; i++){
+            result+=getRandomNumber();
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    public int getRandomNumber(){
+        int number;
+        number = (int)Math.round(Math.random()*9);
+        System.out.println(number);
+        return number;
     }
 }

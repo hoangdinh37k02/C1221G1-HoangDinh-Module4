@@ -3,27 +3,37 @@ package com.codegym.dto;
 import com.codegym.model.service.RentType;
 import com.codegym.model.service.ServiceType;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 public class ServiceDto {
     private int serviceId;
     @Pattern(regexp = "^([A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+\\s{0,}){1,}$", message = "Not null or number in name")
     private String serviceName;
-    @Pattern(regexp = "^[1-9]{1}[0-9]{0,}$",message = "must be postive")
+    private String serviceCode;
+    @Min(value = 1, message = "Minimum is 1")
     private int serviceArea;
-    @Pattern(regexp = "^[1-9]{1}[0-9]{0,}$",message = "must be postive")
+    @Min(value = 1, message = "Minimum is 1")
     private double serviceCost;
-    @Pattern(regexp = "^[1-9]{1}[0-9]{0,}$",message = "must be postive")
+    @Min(value = 1, message = "Minimum is 1")
     private int serviceMaxPeople;
     private String standardRoom;
     private String otherConvenience;
     private int poolArea;
-    @Pattern(regexp = "^[1-9]{1}[0-9]{0,}$",message = "must be postive")
+    @Min(value = 1, message = "Minimum is 1")
     private int numberOfFloor;
     private RentType rentType;
     private ServiceType serviceType;
 
     public ServiceDto() {
+    }
+
+    public String getServiceCode() {
+        return serviceCode;
+    }
+
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
     public int getServiceId() {
