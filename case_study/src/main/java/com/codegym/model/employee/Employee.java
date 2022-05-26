@@ -29,8 +29,17 @@ public class Employee {
     private Division division;
     @OneToMany(mappedBy = "employee")
     private List<Contract> contractList;
+    private int status;
 
     public Employee() {
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public List<Contract> getContractList() {

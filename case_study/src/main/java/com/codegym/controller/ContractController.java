@@ -4,6 +4,7 @@ import com.codegym.dto.ContractDto;
 import com.codegym.dto.CustomerDto;
 import com.codegym.model.contract.Contract;
 import com.codegym.model.customer.Customer;
+import com.codegym.service.MyException;
 import com.codegym.service.contract.IContractService;
 import com.codegym.service.customer.ICustomerService;
 import com.codegym.service.employee.IEmployeeService;
@@ -18,6 +19,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/contract")
@@ -52,7 +55,7 @@ public class ContractController {
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 Model model){
-//        new CustomerDto().validate(customerDto,bindingResult);
+        new ContractDto().validate(contractDto,bindingResult);
         if (bindingResult.hasFieldErrors()){
             model.addAttribute("customer", this.iCustomerService.findAll());
             model.addAttribute("employee", this.iEmployeeService.findAll());
@@ -72,9 +75,14 @@ public class ContractController {
                                 RedirectAttributes redirectAttributes){
 //        this.iContractService.delete(id);
         Contract contract = this.iContractService.findById(id);
-        contract.setStatus(0);
+        contract.setStatus(1);
         this.iContractService.save(contract);
         redirectAttributes.addFlashAttribute("message", "Deleting successful");
         return "redirect:/contract/list";
+    }
+
+    @ExceptionHandler(MyException.class)
+    public String showErrorPage(){
+        return "error";
     }
 }

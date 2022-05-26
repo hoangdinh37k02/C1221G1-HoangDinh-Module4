@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <title>List Employee</title>
     <th:blook th:replace="~{layout :: bootstrap}"></th:blook>
+    <style>
+        body{
+            background-image: linear-gradient(rgba(15,120,224, 0.5),rgba(255, 255, 255, 0.9));
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="~{layout :: nav}"></nav>
@@ -13,15 +21,22 @@
         <a href="/employee/create"><button class="btn btn-primary">Create New Employee</button></a>
     </h2>
     <div class="container">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
             <form action="/employee/list" method="get" class="d-flex input-group w-auto">
-                <input type="search" class="form-control" placeholder="Enter Name" aria-label="Search" name="name">
-
+                <input type="search" class="form-control" placeholder="Search By Name" aria-label="Search" name="name">
+                <input type="search" class="form-control" placeholder="Search By Email" aria-label="Search" name="email">
+                <select class="form-select" aria-label="Default select example" name="division">
+                    <Option value="">Division</Option>
+                    <option th:each="type:${division}"
+                            th:value="${type.id}"
+                            th:text="${type.name}"
+                    ></option>
+                </select>
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
-        <div class="col-lg-4"></div>
+        <div class="col-lg-3"></div>
     </div>
     <p th:text="${message}" style="color: violet; font-size: 50px"></p>
 </center>
@@ -95,10 +110,10 @@
 </div>
 <div>
     <a th:if="${employee.hasPrevious()}"
-       th:href="@{/employee/list(page=${employee.number-1},name=${nameVal})}">Previous</a>
+       th:href="@{/employee/list(page=${employee.number-1},name=${nameVal},email=${emailVal},division=${divisionVal})}">Previous</a>
     <span th:text="${employee.number+1}"></span>/ <span th:text="${employee.totalPages}"></span>
     <a th:if="${employee.hasNext()}"
-       th:href="@{/employee/list(page=${employee.number+1},name=${nameVal})}">Next</a>
+       th:href="@{/employee/list(page=${employee.number+1},name=${nameVal},email=${emailVal},division=${divisionVal})}">Next</a>
 </div>
 
 <form th:action="@{/employee/delete}">

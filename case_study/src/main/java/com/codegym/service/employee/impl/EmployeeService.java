@@ -39,4 +39,14 @@ public class EmployeeService implements IEmployeeService {
     public void deleteById(int employeeId) {
         this.iEmployeeRepository.deleteById(employeeId);
     }
+
+    @Override
+    public Page<Employee> findAll1(int i, String nameVal, String emailVal, Pageable pageable) {
+        return this.iEmployeeRepository.findAllByStatusAndEmployeeNameContainingAndEmailContaining(0,nameVal,emailVal,pageable);
+    }
+
+    @Override
+    public Page<Employee> findAll2(int i, String nameVal, String emailVal, String divisionVal, Pageable pageable) {
+        return this.iEmployeeRepository.findAllByStatusAndEmployeeNameContainingAndEmailContainingAndDivision_Id(0,nameVal,emailVal,Integer.parseInt(divisionVal),pageable);
+    }
 }

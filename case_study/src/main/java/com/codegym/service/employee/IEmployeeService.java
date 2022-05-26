@@ -16,4 +16,8 @@ public interface IEmployeeService {
     List<Employee> findAll();
 
     void deleteById(int employeeId);
+
+    Page<Employee> findAll1(int i, String nameVal, String emailVal, Pageable pageable);
+
+    Page<Employee> findAll2(int i, String nameVal, String emailVal, String divisionVal, Pageable pageable);
 }

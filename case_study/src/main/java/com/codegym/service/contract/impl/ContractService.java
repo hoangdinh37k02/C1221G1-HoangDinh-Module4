@@ -43,6 +43,6 @@ public class ContractService implements IContractService {
 
     @Override
     public Page<Contract> findAllByStatus(int i, Pageable pageable) {
-        return this.iContractRepository.findAllByStatus(1,pageable);
+        return this.iContractRepository.findAllByStatus(0,pageable);
     }
 }

@@ -4,6 +4,9 @@ import com.codegym.model.customer.Customer;
 import com.codegym.model.employee.Employee;
 import com.codegym.model.service.Service;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import java.util.List;
@@ -117,4 +120,6 @@ public class Contract {
     public void setService(Service service) {
         this.service = service;
     }
+
+
 }

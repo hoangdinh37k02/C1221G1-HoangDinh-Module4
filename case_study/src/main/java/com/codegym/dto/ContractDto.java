@@ -3,9 +3,13 @@ package com.codegym.dto;
 import com.codegym.model.customer.Customer;
 import com.codegym.model.employee.Employee;
 import com.codegym.model.service.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import java.time.LocalDate;
 
 
-public class ContractDto {
+public class ContractDto implements Validator {
     private int contractId;
     private String startDay;
     private String endDay;
@@ -80,5 +84,21 @@ public class ContractDto {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        ContractDto contractDto = (ContractDto) target;
+        if (!LocalDate.parse(contractDto.getStartDay()).isAfter(LocalDate.now())){
+            errors.rejectValue("startDay","startDay.default", "default error");
+        }
+        if (!LocalDate.parse(contractDto.getEndDay()).isAfter(LocalDate.parse(contractDto.getStartDay()))){
+            errors.rejectValue("endDay","endDay.default", "default error");
+        }
     }
 }

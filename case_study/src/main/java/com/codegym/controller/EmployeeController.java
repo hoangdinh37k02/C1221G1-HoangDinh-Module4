@@ -11,6 +11,7 @@ import com.codegym.service.employee.IEmployeeService;
 import com.codegym.service.employee.IPositionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -36,10 +37,23 @@ public class EmployeeController {
 
     @GetMapping({"/list","/"})
     public String getCustomerList(Model model, @PageableDefault(value = 5) Pageable pageable,
-                                  @RequestParam Optional<String> name) {
+                                  @RequestParam Optional<String> name, @RequestParam Optional<String> email,
+                                  @RequestParam Optional<String> division) {
         String nameVal = name.orElse("");
-        model.addAttribute("employee", iEmployeeService.findAll(nameVal, pageable));
+        String emailVal = email.orElse("");
+        String divisionVal = division.orElse("");
+        Page<Employee> employeePage = null;
+        if (divisionVal.equals("")){
+            employeePage = this.iEmployeeService.findAll1(0,nameVal,emailVal,pageable);
+        }else {
+            employeePage = this.iEmployeeService.findAll2(0,nameVal,emailVal,divisionVal,pageable);
+        }
+//        model.addAttribute("employee", iEmployeeService.findAll(nameVal, pageable));
+        model.addAttribute("employee", employeePage);
+        model.addAttribute("division", this.iDivisionService.findAll());
         model.addAttribute("nameVal", nameVal);
+        model.addAttribute("emailVal", emailVal);
+        model.addAttribute("divisionVal", divisionVal);
         return "employee/list";
     }
 
@@ -105,7 +119,10 @@ public class EmployeeController {
     @GetMapping(value = "/delete")
     public String deleteProduct(@RequestParam("employeeId") int employeeId,
                                 RedirectAttributes redirectAttributes){
-        this.iEmployeeService.deleteById(employeeId);
+//        this.iEmployeeService.deleteById(employeeId);
+        Employee employee = this.iEmployeeService.findById(employeeId);
+        employee.setStatus(1);
+        this.iEmployeeService.save(employee);
         redirectAttributes.addFlashAttribute("message", "Deleting successful");
         return "redirect:/employee/list";
     }
