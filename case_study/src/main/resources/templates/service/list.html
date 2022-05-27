@@ -60,7 +60,8 @@
                     <td th:text="${serviceObj.serviceCode}"></td>
                     <td th:text="${serviceObj.serviceName}"></td>
                     <td th:text="${serviceObj.serviceArea}"></td>
-                    <td th:text="${serviceObj.serviceCost}"></td>
+<!--                    <td th:text="${serviceObj.serviceCost}"></td>-->
+                    <td th:text="${#numbers.formatDecimal(serviceObj.serviceCost, 0, 'COMMA', 0, 'POINT')}"></td>
                     <td th:text="${serviceObj.serviceMaxPeople}"></td>
                     <td th:text="${serviceObj.standardRoom}"></td>
                     <td th:text="${serviceObj.otherConvenience}"></td>

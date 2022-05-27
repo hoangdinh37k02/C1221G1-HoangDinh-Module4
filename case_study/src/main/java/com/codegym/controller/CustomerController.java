@@ -113,6 +113,15 @@ public class CustomerController {
         return "redirect:/customer/list";
     }
 
+    @GetMapping("/other")
+    public String getList(Model model, @PageableDefault(value = 3, sort = {})Pageable pageable
+                          ){
+//        String nameVal = name.orElse("");
+        model.addAttribute("otherList", this.iCustomerService.getList(pageable));
+//        model.addAttribute("nameVal",nameVal);
+        return "customer/other";
+    }
+
     public String getString(){
         String result ="";
         for (int i=0; i<4; i++){

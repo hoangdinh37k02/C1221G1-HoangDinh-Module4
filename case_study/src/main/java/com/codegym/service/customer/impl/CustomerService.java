@@ -1,5 +1,6 @@
 package com.codegym.service.customer.impl;
 
+import com.codegym.dto.IOther;
 import com.codegym.model.contract.Contract;
 import com.codegym.model.customer.Customer;
 import com.codegym.repository.customer.ICustomerRepository;
@@ -64,5 +65,10 @@ public class CustomerService implements ICustomerService {
     @Override
     public Page<Customer> find2(int i, String nameVal, String emailVal, String typeVal, Pageable pageable) {
         return this.iCustomerRepository.findAllByStatusAndCustomerNameContainingAndEmailContainingAndCustomerType_Id(0,nameVal,emailVal, Integer.parseInt(typeVal),pageable);
+    }
+
+    @Override
+    public Page<IOther> getList(Pageable pageable) {
+        return this.iCustomerRepository.getPage(pageable);
     }
 }

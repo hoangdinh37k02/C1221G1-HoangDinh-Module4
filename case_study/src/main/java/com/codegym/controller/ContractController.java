@@ -6,7 +6,6 @@ import com.codegym.service.contract.IContractService;
 import com.codegym.service.customer.ICustomerService;
 import com.codegym.service.employee.IEmployeeService;
 import com.codegym.service.service.IServiceService;
-import com.codegym.service.service.MyException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -77,8 +76,8 @@ public class ContractController {
         return "redirect:/contract/list";
     }
 
-    @ExceptionHandler(MyException.class)
-    public String showErrorPage(){
-        return "error";
-    }
+//    @ExceptionHandler(NullPointerException.class)
+//    public String showErrorPage(){
+//        return "error";
+//    }
 }

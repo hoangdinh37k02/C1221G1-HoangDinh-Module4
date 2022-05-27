@@ -60,8 +60,10 @@
                     <td th:text="${contract.contractId}"></td>
                     <td th:text="${contract.startDay}"></td>
                     <td th:text="${contract.endDay}"></td>
-                    <td th:text="${contract.deposit}"></td>
-                    <td th:text="${contract.totalMoney}"></td>
+<!--                    <td th:text="${contract.deposit}"></td>-->
+                    <td th:text="${#numbers.formatDecimal(contract.deposit, 0, 'COMMA', 0, 'POINT')}"></td>
+<!--                    <td th:text="${contract.totalMoney}"></td>-->
+                    <td th:text="${#numbers.formatDecimal(contract.totalMoney, 0, 'COMMA', 0, 'POINT')}"></td>
                     <td th:text="${contract.customer.customerName}"></td>
                     <td th:text="${contract.employee.employeeName}"></td>
                     <td th:text="${contract.service.serviceName}"></td>

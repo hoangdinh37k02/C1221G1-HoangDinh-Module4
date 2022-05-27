@@ -1,5 +1,6 @@
 package com.codegym.service.customer;
 
+import com.codegym.dto.IOther;
 import com.codegym.model.contract.Contract;
 import com.codegym.model.customer.Customer;
 import org.springframework.data.domain.Page;
@@ -27,4 +28,6 @@ public interface ICustomerService {
     Page<Customer> find1(int i, String nameVal, String emailVal, Pageable pageable);
 
     Page<Customer> find2(int i, String nameVal, String emailVal, String typeVal, Pageable pageable);
+
+    Page<IOther> getList(Pageable pageable);
 }
