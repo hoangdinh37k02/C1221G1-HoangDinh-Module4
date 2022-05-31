@@ -7,7 +7,7 @@ import javax.swing.plaf.PanelUI;
 
 @Controller
 public class HomeController {
-    @GetMapping(value = {"/", "/home"})
+    @GetMapping(value = { "/home","/"})
     public String goHome() {
         return "home";
     }

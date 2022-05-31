@@ -8,3 +8,4 @@ join service s on s.service_id = c.service_id
 left join contract_detail cd on c.contract_id = cd.contract_id
 left join attach_service `as` on `as`.attach_service_id = cd.attach_service_id
 group by c.contract_id;
+

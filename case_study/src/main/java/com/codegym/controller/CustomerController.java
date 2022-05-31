@@ -114,7 +114,7 @@ public class CustomerController {
     }
 
     @GetMapping("/other")
-    public String getList(Model model, @PageableDefault(value = 3, sort = {})Pageable pageable
+    public String getList(Model model, @PageableDefault(value = 5, sort = {})Pageable pageable
                           ){
 //        String nameVal = name.orElse("");
         model.addAttribute("otherList", this.iCustomerService.getList(pageable));

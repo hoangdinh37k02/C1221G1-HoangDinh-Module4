@@ -4,6 +4,7 @@ import com.codegym.model.employee.Division;
 import com.codegym.model.employee.Education;
 import com.codegym.model.employee.Position;
 
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
@@ -25,8 +26,12 @@ public class EmployeeDto {
     private Education education;
     private Division division;
 
+
+
     public EmployeeDto() {
     }
+
+
 
     public int getEmployeeId() {
         return employeeId;
